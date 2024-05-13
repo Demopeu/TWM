@@ -39,8 +39,12 @@ fix: article/views.py create함수 오류 수정
 
 - VS code
 
-- Figma(예정)
+- Kakao Oven
 
 - Jira
 
 - GitHub
+
+## ERD(Entity Relationship Diagram)
+
+![erd](https://github.com/Demopeu/TWM/assets/156268475/38229d0a-5c6d-4433-9cd6-2273f261b07d)

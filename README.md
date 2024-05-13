@@ -20,3 +20,25 @@ ex. git commit -m "docs: README 내용 수정"
 docs: README 내용 수정
 fix: article/views.py create함수 오류 수정
 ```
+
+## 소프트웨어 도구
+
+- Python
+
+- JS
+
+- HTML
+
+- CSS
+
+- Bootstrap
+
+- Vue3
+
+- Django
+
+- VS code
+
+- Figma
+
+- Jira

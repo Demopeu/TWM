@@ -39,6 +39,8 @@ fix: article/views.py create함수 오류 수정
 
 - VS code
 
-- Figma
+- Figma(예정)
 
 - Jira
+
+- GitHub

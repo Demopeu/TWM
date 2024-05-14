@@ -31,11 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # APPLICATION
     'accounts',
     'community',
     'movies',
+
+    # DRF
     'rest_framework',
     'rest_framework.authtoken',
+
+    # REST_AUTH + social login
     'dj_rest_auth',
     'corsheaders',
     'django.contrib.sites',
@@ -50,6 +55,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    # Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # # permission
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.AllowAny',
+    # ],
+}
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import IndexView from '@/views/IndexView.vue'
 import Login from '@/components/Login.vue'
-import Signup from '@/components/SignUp.vue'
-import Selectcontry from '@/components/SelectContry.vue'
+import SignUp from '@/components/SignUp.vue'
+import SelectCountry from '@/components/SelectCountry.vue'
 import CommunityView from '@/views/CommunityView.vue'
 
 
@@ -22,12 +22,12 @@ const router = createRouter({
         {
           path: '/signup',
           name: 'signup',
-          component: Signup
+          component: SignUp
         },
         {
-          path: '/selectcontry',
-          name:'selectcontry',
-          component: Selectcontry,
+          path: '/selectcountry',
+          name:'selectcountry',
+          component: SelectCountry,
         }
       ]
     },

@@ -7,9 +7,6 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-
-const currentPage = ref('login')
-
 </script>
 
 <style scoped>

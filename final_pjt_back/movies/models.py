@@ -3,8 +3,6 @@ from django.conf import settings
 
 # Create your models here.
 class Movie(models.Model):
-    wishlist_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='wishlist_movies')
-    watched_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='watched_movies')
     tmdb_id = models.IntegerField()
     title = models.CharField(max_length=20)
     overview = models.TextField()
@@ -13,3 +11,8 @@ class Movie(models.Model):
     poster_image = models.URLField()
     trailer_video = models.URLField()
     genre = models.TextField()
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    is_watched = models.BooleanField(default=False)

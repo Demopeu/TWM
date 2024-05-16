@@ -8,6 +8,7 @@ import Movies from '@/views/MovieView.vue'
 import RecommendMovies from '@/components/RecommendMovies.vue'
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

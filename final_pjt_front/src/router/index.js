@@ -4,6 +4,8 @@ import Login from '@/components/Login.vue'
 import SignUp from '@/components/SignUp.vue'
 import SelectCountry from '@/components/SelectCountry.vue'
 import CommunityView from '@/views/CommunityView.vue'
+import Movies from '@/views/MovieView.vue'
+import RecommendMovies from '@/components/RecommendMovies.vue'
 
 
 const router = createRouter({
@@ -35,8 +37,19 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView
-    }
-  ]
+    },
+    {
+      path: '/movies',
+      name: 'movies',
+      component: Movies,
+      children:[
+        {
+          path: '/movies',
+          name: 'RecommendMovies',
+          component: RecommendMovies,
+        },
+      ]
+    },]
 })
 
 export default router

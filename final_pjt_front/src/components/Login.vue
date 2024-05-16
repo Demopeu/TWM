@@ -2,7 +2,7 @@
     <div>
         <div class="login-box">
             <div class="login-box-title">
-                <img src="" alt="">
+                <img class="img-logo" src="@/assets/Logo_black.png" alt="Logo_black.png">
                 <h1>Login</h1>
             </div>
             <div class="login-box-sub-title">
@@ -49,6 +49,7 @@ const login = function () {
 const goToSignUp = () => {
     router.push('/signup')
 }
+
 </script>
 
 <style scoped>
@@ -71,6 +72,14 @@ const goToSignUp = () => {
 .login-box-sub-title {
     margin-bottom: 40px;
 }
+.img-logo {
+  
+  width: 19vh;
+  height: 7vh;
+  margin-left: 5vh;
+  margin-top: 120px;
+}
+
 
 /* form 관련 */
 .login-form {
@@ -120,14 +129,14 @@ button {
 
 /* 글씨체 관련 */
 h1{
-font-weight: bold;
-    margin-top: 120px;
+    font-weight: bold;
     margin-left: 5vh;
     font-size: 86px;
     letter-spacing: -5px;
 }
 h3{
     font-weight: bold;
+    margin-top: 0vh;
     margin-left: 5vh;
     font-size: 24px;
     margin-bottom: 1px;

@@ -19,16 +19,23 @@
                 <div class="input-button-container">
                     <button type="submit">Login</button>
                     <h6 style="margin-left: auto">Not a member yet? 
-                    <span>Register!</span>
+                    <span @click="goToSignUp" >Register!</span>
                     </h6>
                 </div>               
-    </form>
+            </form>
         </div>
     </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import { useCounterStore } from '@/stores/counter.js'
+const router = useRouter()
+const stores = useCounterStore()
 
+const goToSignUp = () => {
+    router.push('/signup')
+}
 </script>
 
 <style scoped>
@@ -122,4 +129,6 @@ span{
     color: blue;
     text-decoration: underline;
 }
+
+
 </style>

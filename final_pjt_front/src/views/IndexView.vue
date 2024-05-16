@@ -1,11 +1,15 @@
 <template>
     <div class="container min-vw-100 min-vh-100">
-        <login />
+        <RouterView />
     </div>
 </template>
 
 <script setup>
-import login from '@/components/Login.vue'
+import { ref } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+
+const currentPage = ref('login')
+
 </script>
 
 <style scoped>

@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Select</h1>
+
         <div @click="handleClick">
             <button value="US, CA, MX">N.America</button>
             <button value="BR, AR, CL, VE, CO">S.America</button>
@@ -14,6 +15,7 @@
 </template>
 
 <script setup>
+
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

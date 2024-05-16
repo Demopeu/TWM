@@ -6,7 +6,17 @@
 
     - .login-box를 확대하는 css애니메이션
 
+2. SignUp.vue
+
+   - 회원가입 기능 구현 필요
+  
+3. selectCountry,vue
+
+   - Back 연동 구현 필요
+
 # Back
+
+## 영화 DB를 어떻게 공유하냐 -> 파일이 무거워서 git안됨 -> plug깔아서 일단 로컬에 넣자
 
 # Completed
 

@@ -3,6 +3,7 @@ import IndexView from '@/views/IndexView.vue'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/SignUp.vue'
 import Selectcontry from '@/components/SelectContry.vue'
+import CommunityView from '@/views/CommunityView.vue'
 
 
 const router = createRouter({
@@ -10,7 +11,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'mainpage',
       component: IndexView,
       children:[
         {
@@ -30,6 +31,11 @@ const router = createRouter({
         }
       ]
     },
+    {
+      path: '/community',
+      name: 'community',
+      component: CommunityView
+    }
   ]
 })
 

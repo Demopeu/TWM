@@ -10,10 +10,10 @@
                 <h3>Login and your</h3>
                 <h3>Password</h3>
             </div>
-            <form class="login-form" @submit.prevent="submitForm">
+            <form class="login-form" @submit.prevent="login">
                 <div class="input-container">
-                    <input type="text" placeholder="Username">
-                    <input type="password" placeholder="Password">
+                    <input type="text" placeholder="Username" v-model.trim="username">
+                    <input type="password" placeholder="Password" v-model.trim="password">
                     <h6 style="margin-left: auto">Forgot Passwords?</h6>
                 </div>
                 <div class="input-button-container">
@@ -28,10 +28,23 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter.js'
 const router = useRouter()
-const stores = useCounterStore()
+const store = useCounterStore()
+const username = ref(null)
+const password = ref(null)
+
+const login = function () {
+    const payload = {
+        username: username.value,
+        password: password.value,
+    }
+    store.login(payload)
+    username.value = null
+    password.value = null
+}
 
 const goToSignUp = () => {
     router.push('/signup')

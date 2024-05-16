@@ -16,6 +16,8 @@
 
 # Back
 
+## 영화 DB를 어떻게 공유하냐 -> 파일이 무거워서 git안됨 -> plug깔아서 일단 로컬에 넣자
+
 # Completed
 
 ~~시청 목록 구현 변경 : Detail page -> profile page에서 추가~~

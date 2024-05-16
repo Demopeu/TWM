@@ -6,6 +6,7 @@ import SelectCountry from '@/components/SelectCountry.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import Movies from '@/views/MovieView.vue'
 import RecommendMovies from '@/components/RecommendMovies.vue'
+import RecommendMoviesDetail from '@/components/RecommendMoviesDetail.vue'
 
 
 
@@ -48,6 +49,11 @@ const router = createRouter({
           path: '/movies',
           name: 'RecommendMovies',
           component: RecommendMovies,
+        },
+        {
+          path: '/movies/:id',
+          name: 'MovieDetail',
+          component: RecommendMoviesDetail,
         },
       ]
     },]

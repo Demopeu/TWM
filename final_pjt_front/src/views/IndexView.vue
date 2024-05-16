@@ -1,6 +1,7 @@
 <template>
     <div class="container min-vw-100 min-vh-100">
         <login />
+        RouterLink to={~~~ params:{country:~~}}
     </div>
 </template>
 

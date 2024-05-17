@@ -1,5 +1,4 @@
 <template>
-    <div>
         <div class="login-box">
             <div class="login-box-title">
                 <img class="img-logo" src="@/assets/Logo_black.png" alt="Logo_black.png">
@@ -24,7 +23,6 @@
                 </div>               
             </form>
         </div>
-    </div>
 </template>
 
 <script setup>
@@ -56,10 +54,10 @@ const goToSignUp = () => {
 /* 로그인 박스 관련 */
 .login-box{
     width: 400px;
-    height: 100vh;
-    margin: auto;
+    height: 100%;
+    margin-left: 10vh;
     background-color: #EDFFED; 
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 50%;

@@ -21,7 +21,7 @@ export const useCounterStore = defineStore('counter', () => {
         router.push({ name:'selectcountry' })
       })
       .catch(error => {
-        console.log(error)
+        alert("인증 정보가 정확하지 않습니다. 다시 시도해주세요.")
       })
   }
   const signUp = function(payload) {

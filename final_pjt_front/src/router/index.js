@@ -46,7 +46,7 @@ const router = createRouter({
       component: Movies,
       children:[
         {
-          path: '/movies',
+          path: '/movies/:country',
           name: 'RecommendMovies',
           component: RecommendMovies,
         },

@@ -2,7 +2,7 @@
     <div>
         <div class="title">
         <h1>Movies set in</h1>
-        <h1>{{ country }}</h1>
+        <h1>{{ name }}</h1>
         </div>
         <div class="movieLists">
             <!-- <div v-for="movie in Store.movies" :key="movie.id" >
@@ -17,12 +17,13 @@
 
 <script setup>
 import {ref} from 'vue'
-import {useCounterStore} from '@/stores/counter'
-const Store = useCounterStore()
+import { useCounterStore } from '@/stores/counter'
+import { useRoute } from 'vue-router'
 import { onMounted } from 'vue'
-const country = ref("Korea")
-
-const getMoviePosterUrl = (posterPath) => `https://image.tmdb.org/t/p/w500${posterPath}`;
+const store = useCounterStore()
+const route = useRoute()
+// const getMoviePosterUrl = (posterPath) => `https://image.tmdb.org/t/p/w500${posterPath}`;
+const name = route.params.country
 
 // Detailpage로 이동
 // const goDetailpage = (movieId)=> route.push(`/${movieId}`)

@@ -6,7 +6,7 @@
             <h2>Travel With Movie!</h2>
             <button class="close-button" @click="goBack">X</button>
         </div>
-        <form class="signup-box-content">
+        <form class="signup-box-content" @submit.prevent="signUp">
           <div class="input-container">
             <h3>Enter your username *</h3>
             <input
@@ -18,22 +18,22 @@
             <h3>Enter your password *</h3>
             <input
               type="password"
-              v-model="password"
+              v-model="password1"
               placeholder="Password"
               required
               />
             <h3>Confirm your password *</h3>
             <input
               type="password"
-              v-model="confirmPassword"
+              v-model="password2"
               placeholder="Confirm Password"
               required
               />
-            <h3>Enter your email</h3>
+            <h3>Enter your email *</h3>
             <input
               type="email"
               v-model="email"
-              placeholder="Email (optional)"
+              placeholder="Email"
               />
         </div>
         <div class="input-button-container">
@@ -44,6 +44,30 @@
 </template>
 
 <script setup>
+import { ref } from "vue"
+import { useCounterStore } from "@/stores/counter";
+
+const username = ref(null)
+const password1 = ref(null)
+const password2 = ref(null)
+const email = ref(null)
+const trophys = ref(null)
+const store = useCounterStore()
+
+const signUp = function() {
+  const payload = {
+    username: username.value,
+    password1:  password1.value,
+    password2:  password2.value,
+    email: email.value,
+    trophys: trophys.value,
+  }
+  store.signUp(payload)
+  username.value = null
+  password1.value = null
+  password2.value = null
+  email.value = null
+}
 
 </script>
 

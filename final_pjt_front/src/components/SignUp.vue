@@ -4,7 +4,6 @@
             <img class="img-logo" src="@/assets/Logo_black.png" alt="Logo_black.png">
             <h1>Welcome to</h1>
             <h2>Travel With Movie!</h2>
-            <button class="close-button" @click="goBack">X</button>
         </div>
         <form class="signup-box-content" @submit.prevent="signUp">
           <div class="input-container">
@@ -38,6 +37,7 @@
         </div>
         <div class="input-button-container">
             <button type="submit">SIGN UP</button>
+            <button @click="goBack" style="background-color: #FF6767;">Back</button>
         </div>
     </form>
   </div>
@@ -45,7 +45,9 @@
 
 <script setup>
 import { ref } from "vue"
-import { useCounterStore } from "@/stores/counter";
+import { useCounterStore } from "@/stores/counter"
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const username = ref(null)
 const password1 = ref(null)
@@ -67,6 +69,9 @@ const signUp = function() {
   password1.value = null
   password2.value = null
   email.value = null
+}
+const goBack = () => {
+    router.push('/')
 }
 
 </script>
@@ -127,12 +132,12 @@ const signUp = function() {
 
 .input-button-container {
   display: flex;
+  margin-left: 5vh;
   flex: 2;
-  justify-content: space-between;
 }
 
 .input-button-container button {
-  margin-left: 5vh;
+  margin-right: 2vh;
   padding: 10px 20px;
   border: none;
   background-color: #ADD8E6;

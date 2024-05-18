@@ -42,10 +42,16 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
      .then(response => {
-        router.push({ name:'selectcountry' })
+        router.push({ name:'login' })
       })
      .catch(error => {
-        console.log(error.response.data)
+      console.log(error.response.data)
+      const error_message = ref([])
+      for (const key in error.response.data) {
+          error_message.value.push(error.response.data[key])
+      }
+      alert(error_message.value)
+      console.log(error_message.value)
       })
   }
   return { login, token, signUp }

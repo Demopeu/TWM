@@ -4,13 +4,19 @@
         <h1>Movies set in</h1>
         <h1>{{ name }}</h1>
         </div>
+        <div>
+            <div v-for="movie in store.movies":key="movie.id" :movie="movie">
+                <RouterLink :to="{ name: 'MovieDetail', params: { id: movie.id } }">
+                    <img :src="movie.poster_image" alt="poster_image">
+                </RouterLink>
+            </div>
+        </div>
         <div class="movieLists">
             <!-- <div v-for="movie in Store.movies" :key="movie.id" >
                 <div v-if="movie.poster_path" class="movie-card" @click="goDetailpage(movie.id)">
                 <img :src="getMoviePosterUrl(movie.poster_path)" alt="Movie Poster" class="movie-img"/>
                 </div>
             </div> -->
-
         </div>
     </div>
 </template>
@@ -18,8 +24,8 @@
 <script setup>
 import {ref} from 'vue'
 import { useCounterStore } from '@/stores/counter'
-import { useRoute } from 'vue-router'
-import { onMounted } from 'vue'
+import { useRoute, RouterLink } from 'vue-router'
+
 const store = useCounterStore()
 const route = useRoute()
 // const getMoviePosterUrl = (posterPath) => `https://image.tmdb.org/t/p/w500${posterPath}`;

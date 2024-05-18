@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 
 export const useCounterStore = defineStore('counter', () => {
@@ -24,6 +24,7 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(error)
       })
   }
+
   const signUp = function(payload) {
     const username = payload.username
     const password1 =  payload.password1
@@ -48,5 +49,22 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(error.response.data)
       })
   }
-  return { login, token, signUp }
+
+  const movies = ref([])
+  const goRecommendedMovie = function (region) {
+    const country = region
+    axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/movies/recommend/${country}/`,
+    })
+    .then(response => {
+        movies.value = response.data
+        router.push({ name: 'RecommendMovies', params: {country: country} })
+    })
+    .catch(error => {
+        console.log(error)
+    })
+  }
+
+  return { login, token, movies, signUp, goRecommendedMovie }
 })

@@ -8,9 +8,11 @@ class Movie(models.Model):
     overview = models.TextField()
     rating = models.FloatField()
     country = models.TextField()
+    release_date = models.TextField()
     poster_image = models.URLField()
     trailer_video = models.URLField()
     genre = models.TextField()
+    certification = models.TextField()
 
 class Wishlist(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

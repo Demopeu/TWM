@@ -18,16 +18,11 @@ from urllib.parse import quote
 def add_to_wishlist(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     user = request.user
-    
-    if Wishlist.objects.filter(movie=movie, user=user).exists():
+    if Wishlist.objects.filter(movie_id=pk, user=user).exists():
         return Response({'detail': 'Movie already in wishlist.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    data = {'movie': movie.pk, 'user': user.pk}
-    serializer = WishlistSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({'detail': 'Movie added to wishlist.'}, status=status.HTTP_200_OK)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    Wishlist.objects.create(movie=movie, user=user, is_watched=False)
+    return Response({'detail': 'Movie added to wishlist.'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -110,7 +105,7 @@ def fetch_movies_from_tmdb(request):
     url = "https://api.themoviedb.org/3/discover/movie"
     api_key = settings.TMDB_API_KEY
     genre_mapping = get_genre_mapping(api_key)
-    countries = ['US'] # ['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'VE', 'CO', 'GB', 'FR', 'DE', 'IT', 'RU', 'ID', 'KR', 'CN', 'JP']
+    countries = ['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'VE', 'CO', 'GB', 'FR', 'DE', 'IT', 'RU', 'ID', 'KR', 'CN', 'JP']
     
     # 초당 요청 수를 제한하기 위한 변수
     requests_per_second = 35
@@ -118,7 +113,7 @@ def fetch_movies_from_tmdb(request):
 
     for country_name in countries:
         current_page = 1
-        while current_page < 2:
+        while current_page < 3:
             params = {
                 'api_key': api_key,
                 'page': current_page,
@@ -147,10 +142,12 @@ def fetch_movies_from_tmdb(request):
 
                         certification = get_movie_certification(api_key, tmdb_id)
                         trailer_video = ''
+                        english_title = movie_data.get('original_title', '')
                         if certification:
                             Movie.objects.create(
                                 tmdb_id=tmdb_id,
                                 title=title,
+                                english_title=english_title,
                                 overview=overview,
                                 rating=rating,
                                 release_date=release_date,

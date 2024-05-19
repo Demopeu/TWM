@@ -1,11 +1,11 @@
 <template>
   <div class="container min-vw-100 min-vh-100" >
-    <RouterView />
+    <ArticleList />
   </div>
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from 'vue-router'
+import ArticleList from '@/components/ArticleList.vue';
 
 </script>
 

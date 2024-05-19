@@ -5,6 +5,7 @@ from django.conf import settings
 class Movie(models.Model):
     tmdb_id = models.IntegerField()
     title = models.CharField(max_length=20)
+    english_title = models.TextField()
     overview = models.TextField()
     rating = models.FloatField()
     country = models.TextField()

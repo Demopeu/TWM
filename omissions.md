@@ -22,7 +22,7 @@
 
 4. RecommendMoviesDetail.vue
 
-   - 임시로 넣은 유튜브 트레일러 받아오는 코드에서 API 오류 발생
+   - 임시로 유튜브 트레일러 받아오는 코드 detail페이지에 구현.
 
 # Back
 

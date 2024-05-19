@@ -8,6 +8,7 @@ import MovieView from '@/views/MovieView.vue'
 import RecommendMovies from '@/components/RecommendMovies.vue'
 import RecommendMoviesDetail from '@/components/RecommendMoviesDetail.vue'
 import ArticleList from '@/components/ArticleList.vue'
+import DetailView from '@/views/DetailView.vue'
 
 
 
@@ -45,8 +46,13 @@ const router = createRouter({
           path: '/community',
           name: 'ArticleList',
           component: ArticleList,
-      }
-    ]
+        },
+      ]
+    },
+    {
+      path: '/community/:articleId',
+      name: 'DetailView',
+      component: DetailView,
     },
     {
       path: '/movies',

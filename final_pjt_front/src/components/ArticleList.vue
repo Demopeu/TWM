@@ -22,17 +22,19 @@
             <span class="index-item" style="flex: 2">작성일</span>
             <span class="index-item" style="flex: 1">좋아요</span>
           </div>
-          <div v-for="article in articles"
-          :key="article.id">
-          <div class="index-box" style="background-color: white;">
-            <span class="index-item" style="flex: 2">{{ article.id }}</span>
-            <span class="index-item" style="flex: 3">{{ article.title }}</span>
-            <span class="index-item" style="flex: 2">{{ article.account_id }}</span>
-            <span class="index-item" style="flex: 2">{{ article.created_at }}</span>
-            <span v-if="article.likes"  class="index-item" style="flex: 1">{{ article.likes.length }}</span>
+          <div class="index-box" style="background-color: white;"> 
+            <ArticleListItem
+              v-for="article in store.articles"
+              :key="article.id"
+              :article="article"
+            />
+              <!-- <span class="index-item" style="flex: 2">{{ article.id }}</span>
+              <span class="index-item" style="flex: 3">{{ article.title }}</span>
+              <span class="index-item" style="flex: 2">{{ article.user.id }}</span>
+              <span class="index-item" style="flex: 2">{{ article.created_at }}</span>
+              <span v-if="article.likes"  class="index-item" style="flex: 1">{{ article.likes.length }}</span> -->
           </div>
           <hr>
-          </div>
         </div>
       </div>
       
@@ -41,25 +43,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const articles = ref(
-  [{id: '1', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '2', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '3', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '4', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '5', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '6', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '7', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '8', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '9', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '10', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '11', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '12', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '13', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '14', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '15', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-  {id: '16', title: '라라랜드 영화 촬영지 여행', account_id: '고등어아저씨', created_at: '2021-09-01',likes: [{id: '1', account_id: '고등어아저씨'}]},
-])
+import { ref, onMounted } from 'vue'
+import { useCounterStore } from '@/stores/counter';
+import ArticleListItem from '@/components/ArticleListItem.vue';
+
+const store = useCounterStore()
+onMounted(() => {
+  store.getArticles()
+})
 </script>
 
 <style scoped>

@@ -8,7 +8,8 @@ export const useCounterStore = defineStore('counter', () => {
   const token = ref(null)
   const router = useRouter()
   const toast = useToast()
-  
+  const articles = ref([])
+
   const login = function(payload) {
     const username = payload.username
     const password = payload.password
@@ -21,6 +22,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then(response => {
+        token.value = response.data.key
         router.push({ name:'selectcountry' })
       })
       .catch(error => {
@@ -74,5 +76,42 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { login, token, movies, signUp, goRecommendedMovie }
-})
+  const addWishList = (movieId) => {
+    console.log(token.value)
+    axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/movies/${movieId}/add_to_wishlist/`,
+        headers: {
+          Authorization: `Token ${token.value}`
+        },
+        data: {
+          movie: movieId
+        }   
+    })
+    .then((response) => {
+        console.log('위시리스트에 담겼습니다')
+    })
+    .catch((error) => {
+        console.log('이미 위시리스트에 담겨있습니다.')
+        console.log(error)
+    })
+  }
+
+  const getArticles = function () {
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/community/articles/',
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+    .then((response) => {
+      articles.value = response.data
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  return { articles, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie }
+}, { persist: true })

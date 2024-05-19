@@ -14,7 +14,7 @@
   
 3. selectCountry.vue
 
-   - Back 연동 구현 필요
+   - 네비바 router로 움직였을때 데이터가 바로 안받아져요. f5눌러야함
 
 4. RecommendMovies.vue
 

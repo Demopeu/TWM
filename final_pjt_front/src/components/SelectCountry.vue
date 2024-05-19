@@ -1,5 +1,21 @@
 <template>
     <div class="container-inner">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png" @click="goidnav">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav d-flex ms-auto">
+            <li class="nav-item">
+                <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
+            </li>
+            <li class="nav-item">
+                <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
+            </li>
+        </ul>
+      </div>
+    </nav>
         <div @click="handleClick" ref="centeredElement " class="centered-element-north">
             <button value="north_america">N.America</button>
         </div>
@@ -28,7 +44,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useCounterStore } from '@/stores/counter';
+import { RouterLink, RouterView } from 'vue-router'
+import { useCounterStore } from '@/stores/counter'
 
 const router = useRouter()
 const centeredElement = ref(null)
@@ -56,12 +73,19 @@ const handleScroll = () => {
     if (centeredElement.value && container.value) {
         const containerRect = container.value.getBoundingClientRect()
         const containerTop = containerRect.top
-
-        // 요소가 현재 보이는 페이지의 절대 위치에 고정됩니다.
         centeredElement.value.style.position = 'absolute'
         centeredElement.value.style.top = `${containerTop}px`
     }
 
+}
+const goidnav = ()=>{
+    store.goIndexNav()
+}
+const gocomunav = ()=>{
+    store.goCommunityNav()
+}
+const gopronav = ()=>{
+    store.goProfileNav()
 }
 
 
@@ -76,7 +100,7 @@ const handleScroll = () => {
 
 .centered-element-north{
   position: absolute;
-  left: 25%;
+  left: 20%;
   top: 250px;
   transform: translateX(-50%);
   width: 100px;
@@ -86,6 +110,13 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #FF7070;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
 }
 
 .centered-element-sorth{
@@ -100,6 +131,13 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #FFEF5E;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
 }
 
 .centered-element-europe{
@@ -114,6 +152,13 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #BDE5C1;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
 }
 
 .centered-element-india{
@@ -128,11 +173,18 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #7B88FB;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
 }
 .centered-element-China{
   position: absolute;
   left: 77%;
-  top: 200px;
+  top: 330px;
   transform: translateX(-50%);
   width: 100px;
   height: 50px;
@@ -141,6 +193,13 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #CAA9FF;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
 }
 .centered-element-Korea{
   position: absolute;
@@ -154,11 +213,18 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #F69DE3;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
 }
 .centered-element-Japan {
   position: absolute;
-  left: 92%;
-  top: 330px;
+  left: 87%;
+  top: 370px;
   transform: translateX(-50%);
   width: 100px;
   height: 50px;
@@ -167,5 +233,38 @@ const handleScroll = () => {
     text-overflow: ellipsis;
     width: 100px;
     height: 50px;
+
+    border: 5px solid #FF3131;
+    border-radius: 30px; 
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+  font-size: 1.2em;
+  padding: 10px 20px;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 10px;
+}
+
+.navbar {
+  width: 100vw;
+  padding: 0;
+}
+
+.img-logo {
+  
+  width: 190px;
+  height: 70px;
+  padding: 0;
 }
 </style>

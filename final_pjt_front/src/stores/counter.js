@@ -73,6 +73,11 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(error)
     })
   }
+  const goCommunityNav = () => {router.push({ name: 'community' })}
+  const goIndexNav = () => {router.push({ name: 'login' })}
+  // 임시
+  const goProfileNav = () => {router.push({ name: 'community' })}
 
-  return { login, token, movies, signUp, goRecommendedMovie }
+return { login, token, movies, signUp,goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav}
+
 })

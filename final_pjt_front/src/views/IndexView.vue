@@ -14,6 +14,7 @@ import { RouterLink, RouterView } from 'vue-router'
     height: 1080px;
     max-height: 800px;
     background-size: 100% 100%;
+    padding: 0;
     background-image: url('@/assets/WorldMap.png');
 }
 </style>

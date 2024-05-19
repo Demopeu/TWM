@@ -12,9 +12,17 @@
 
    - 회원가입 기능 구현 필요
   
-3. selectCountry,vue
+3. selectCountry.vue
 
    - Back 연동 구현 필요
+
+4. RecommendMovies.vue
+
+   - 해당 페이지에서 새로고침 하면 영화 목록이 사라짐 -> 추후 피니아 도입으로 해결 예정
+
+4. RecommendMoviesDetail.vue
+
+   - 임시로 넣은 유튜브 트레일러 받아오는 코드에서 API 오류 발생
 
 # Back
 

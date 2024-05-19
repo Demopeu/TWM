@@ -16,10 +16,10 @@
             <button value="china">China</button>
         </div>
         <div @click="handleClick" ref="centeredElement " class="centered-element-Korea">
-            <button value="south_america">Korea</button>
+            <button value="korea">Korea</button>
         </div>
         <div @click="handleClick" ref="centeredElement " class="centered-element-Japan">
-            <button value="south_america">Japan</button>
+            <button value="japan">Japan</button>
         </div>
 
     </div>
@@ -28,10 +28,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { useCounterStore } from '@/stores/counter';
 
 const router = useRouter()
 const centeredElement = ref(null)
+const store = useCounterStore()
 
 const handleClick = function (event) {
     const button = event.target
@@ -39,23 +40,6 @@ const handleClick = function (event) {
         const region = button.value
         store.goRecommendedMovie(region)
     }
-}
-
-
-const goRecommendedMovie = function (region) {
-    const country = region
-
-    axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/recommend/${country}/`,
-    })
-    .then(response => {
-        console.log('데이터 받기 성공!')
-        console.log(response.data)
-    })
-    .catch(error => {
-        console.log(error)
-    })
 }
 
 onMounted(() => {

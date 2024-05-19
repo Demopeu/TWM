@@ -2,10 +2,13 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
+import { useToast } from 'vue-toastification'
 
 export const useCounterStore = defineStore('counter', () => {
   const token = ref(null)
   const router = useRouter()
+  const toast = useToast()
+  
   const login = function(payload) {
     const username = payload.username
     const password = payload.password
@@ -21,7 +24,7 @@ export const useCounterStore = defineStore('counter', () => {
         router.push({ name:'selectcountry' })
       })
       .catch(error => {
-        console.log(error)
+        toast.error("인증 정보가 정확하지 않습니다. 다시 시도해주세요.")
       })
   }
 
@@ -43,10 +46,15 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
      .then(response => {
-        router.push({ name:'selectcountry' })
+        router.push({ name:'login' })
       })
      .catch(error => {
-        console.log(error.response.data)
+      console.log(error.response.data)
+      const error_message = ref([])
+      for (const key in error.response.data) {
+        error_message.value.push(...error.response.data[key])
+      }
+      toast.error(error_message.value.join('\n'))
       })
   }
 

@@ -75,8 +75,12 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(error)
     })
   }
-
-  const addWishList = (movieId) => {
+  const goCommunityNav = () => {router.push({ name: 'community' })}
+  const goIndexNav = () => {router.push({ name: 'login' })}
+  // 임시
+  const goProfileNav = () => {router.push({ name: 'community' })}
+  
+    const addWishList = (movieId) => {
     console.log(token.value)
     axios({
         method: 'post',
@@ -113,5 +117,6 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { articles, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie }
+  return { articles, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav }
 }, { persist: true })
+

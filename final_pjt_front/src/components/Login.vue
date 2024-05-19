@@ -72,8 +72,8 @@ const goToSignUp = () => {
 }
 .img-logo {
   
-  width: 19vh;
-  height: 7vh;
+  width: 190px;
+  height: 70px;
   margin-left: 5vh;
   margin-top: 120px;
 }

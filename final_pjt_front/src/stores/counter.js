@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 import { useToast } from 'vue-toastification'
 
@@ -27,6 +27,7 @@ export const useCounterStore = defineStore('counter', () => {
         toast.error("인증 정보가 정확하지 않습니다. 다시 시도해주세요.")
       })
   }
+
   const signUp = function(payload) {
     const username = payload.username
     const password1 =  payload.password1
@@ -56,5 +57,22 @@ export const useCounterStore = defineStore('counter', () => {
       toast.error(error_message.value.join('\n'))
       })
   }
-  return { login, token, signUp }
+
+  const movies = ref([])
+  const goRecommendedMovie = function (region) {
+    const country = region
+    axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/movies/recommend/${country}/`,
+    })
+    .then(response => {
+        movies.value = response.data
+        router.push({ name: 'RecommendMovies', params: {country: country} })
+    })
+    .catch(error => {
+        console.log(error)
+    })
+  }
+
+  return { login, token, movies, signUp, goRecommendedMovie }
 })

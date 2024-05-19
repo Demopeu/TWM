@@ -37,9 +37,10 @@ const handleClick = function (event) {
     const button = event.target
     if (button.tagName === 'BUTTON') {
         const region = button.value
-        goRecommendedMovie(region)
+        store.goRecommendedMovie(region)
     }
 }
+
 
 const goRecommendedMovie = function (region) {
     const country = region
@@ -78,6 +79,7 @@ const handleScroll = () => {
     }
 
 }
+
 
 </script>
 

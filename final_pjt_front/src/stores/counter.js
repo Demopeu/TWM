@@ -227,4 +227,3 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { articles, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })
-

@@ -37,7 +37,11 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
 
     class CommentDetailSerializer(serializers.ModelSerializer):
-        
+        class UserSerializer(serializers.ModelSerializer):
+            class Meta:
+                model = User
+                fields = ['username']
+        user = UserSerializer(read_only=True)
         class Meta:
             model = Comment
             fields = '__all__'
@@ -46,7 +50,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
         class Meta:
             model = User
-            fields = ['username']
+            fields = ['id', 'username']
+
     user = UserSerializer(read_only=True)
     comment_set = CommentDetailSerializer(read_only=True, many=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
@@ -76,3 +81,22 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+class CommentCreateSerializer(serializers.ModelSerializer):
+
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = ['username']
+
+    user = UserSerializer(read_only=True)
+    class Meta:
+        model = Comment
+        fields = ['user', 'content']
+    
+    def create(self, validated_data):
+        # 현재 요청을 보낸 사용자를 작성자로 설정
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return super().create(validated_data)

@@ -4,7 +4,7 @@
       <span class="index-item" style="flex: 2">{{ article.id }}</span>
       <span class="index-item" style="flex: 3">{{ article.title }}</span>
       <span class="index-item" style="flex: 2">{{ article.user.username }}</span>
-      <span class="index-item" style="flex: 2">{{ article.created_at }}</span>
+      <span class="index-item" style="flex: 2">{{ article.new_created_at }}</span>
       <span class="index-item" style="flex: 1">{{ article.like_users_count }}</span>
 
     </RouterLink>
@@ -12,15 +12,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import axios from 'axios';
 
 const props = defineProps({
   article: Object
 })
-
-const username = ref('김동현');
 
 </script>
 

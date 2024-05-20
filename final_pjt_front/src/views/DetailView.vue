@@ -6,15 +6,15 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav d-flex ms-auto">
+              <ul class="navbar-nav d-flex ms-auto">
             <li class="nav-item">
-                <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
+                <button @click.prevent="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
             </li>
             <li class="nav-item">
                 <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
-                <button @click="" class="btn btn-outline-light" style="border: black;">로그아웃</button>
+                <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
             </ul>
           </div>
@@ -51,9 +51,9 @@
                     <button class="like-button"></button>
                   </div>
                   <hr style="margin: 0.5vh; color: #2FB2FC; border-width: 2px; border-style: solid;">
-                    <div v-if="article.comment_set">
+                    <!-- <div v-if="article.comment_set">
                       <h6>{{ article.comment_set }}</h6>
-                  </div>
+                  </div> -->
             </div>
         </div>
       </div>
@@ -66,9 +66,12 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios'
+import { useCounterStore } from '@/stores/counter'
 
+const store = useCounterStore()
 const route = useRoute()
 const article = ref(null)
+
 
 onMounted(() => {
     axios({
@@ -84,8 +87,19 @@ onMounted(() => {
     })
 })
 
-const username = ref('김동현')
-const created_at = ref('2024.05.06')
+const goidnav = ()=>{
+    store.goIndexNav()
+}
+const gocomunav = ()=>{
+    console.log('gocomunav 확인')
+    store.goCommunityNav()
+}
+const gopronav = ()=>{
+    store.goProfileNav()
+}
+const logout = ()=>{
+  store.logout()
+}
 </script>
 
 <style scoped>

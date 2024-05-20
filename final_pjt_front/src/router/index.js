@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useCounterStore } from '@/stores/counter'
+import { useToast } from 'vue-toastification'
 import IndexView from '@/views/IndexView.vue'
 import Login from '@/components/Login.vue'
 import SignUp from '@/components/SignUp.vue'
@@ -10,8 +12,6 @@ import RecommendMoviesDetail from '@/components/RecommendMoviesDetail.vue'
 import ArticleList from '@/components/ArticleList.vue'
 import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
-
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +78,16 @@ const router = createRouter({
       component: CreateView,
     }
   ]
+})
+
+router.beforeEach((to,from)=>{
+ const store = useCounterStore()
+ const toast = useToast()
+
+ if (to.name !== 'login' && to.name !== 'signup' && to.name !== 'mainpage' && store.token===null) {
+    toast.error("로그인이 필요합니다.")
+    return {name: 'login'}
+  }
 })
 
 export default router

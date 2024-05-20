@@ -26,6 +26,8 @@
 
 # Back
 
+1. articles - 10개씩 받기
+
 ## 영화 DB를 어떻게 공유하냐 -> 파일이 무거워서 git안됨 -> plug깔아서 일단 로컬에 넣자
 
 # Completed

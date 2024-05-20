@@ -14,7 +14,7 @@
                 <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
-                <button @click="" class="btn btn-outline-light" style="border: black;">로그아웃</button>
+                <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
             </ul>
           </div>
@@ -90,7 +90,9 @@ const gocomunav = ()=>{
 const gopronav = ()=>{
     store.goProfileNav()
 }
-
+const logout = ()=>{
+  store.logout()
+}
 
 </script>
 

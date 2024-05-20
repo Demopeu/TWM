@@ -5,15 +5,15 @@ import "vue-toastification/dist/index.css"
 import Toast, { POSITION } from "vue-toastification"
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
+
 import App from './App.vue'
-import router from './router'
+import router from '@/router'
 
 const app = createApp(App)
 const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
 
-// app.use(createPinia())
 app.use(pinia)
 app.use(router)
 app.use(Toast, {

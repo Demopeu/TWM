@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .serializers import ArticleSerializer, CommentSerializer, ArticleListSerializer
+from .serializers import ArticleSerializer, CommentSerializer, ArticleListSerializer, ArticleCreateSerializer
 from .models import Article, Comment
 
 
@@ -17,7 +17,7 @@ def article_list(request):
         return Response(serializer.data)
     
     elif request.method == 'POST':
-        serializer = ArticleSerializer(data=request.data)
+        serializer = ArticleCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

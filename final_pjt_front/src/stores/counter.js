@@ -29,6 +29,24 @@ export const useCounterStore = defineStore('counter', () => {
         toast.error("인증 정보가 정확하지 않습니다. 다시 시도해주세요.")
       })
   }
+  
+  const logout = function() {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/accounts/logout/',
+      headers: {
+        'Authorization': `Token ${token.value}`,
+      }
+      .then(response => {
+        localStorage.removeItem('auth_token')
+        token.value = null
+        router.push({ name:'login' })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    })
+  }
 
   const signUp = function(payload) {
     const username = payload.username
@@ -117,6 +135,30 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { articles, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav }
+  const createArticle = function (payload) {
+    const title = payload.title
+    const content = payload.content
+    const country = payload.country
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/community/articles/',
+      headers: {
+        Authorization: `Token ${token.value}`
+      },
+      data: {
+        title: title,
+        content: content,
+        country: country
+      }
+    })
+    .then((response) => {
+      router.push({ name: 'community'})
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  return { articles, createArticle, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav }
 }, { persist: true })
 

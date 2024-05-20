@@ -5,31 +5,64 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class ArticleListSerializer(serializers.ModelSerializer):
+
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = User
-            fields = ['id']
+            fields = ['id', 'username']
 
     user = UserSerializer(read_only=True)
-    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+    new_created_at = serializers.SerializerMethodField()
+    new_updated_at = serializers.SerializerMethodField()
+    like_users_count = serializers.IntegerField(source='likes_users.count', read_only=True)
 
     class Meta:
         model = Article
         fields = '__all__'
+    
+    def get_new_created_at(self, obj):
+        return obj.created_at.strftime("%Y-%m-%d")
+    
+    def get_new_updated_at(self, obj):
+        return obj.updated_at.strftime("%Y-%m-%d")
+
+
+class ArticleCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ['title', 'content', 'country']
+
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+
     class CommentDetailSerializer(serializers.ModelSerializer):
+        
         class Meta:
             model = Comment
-            fields = ('content',)
+            fields = '__all__'
 
+    class UserSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = User
+            fields = ['username']
+    user = UserSerializer(read_only=True)
     comment_set = CommentDetailSerializer(read_only=True, many=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
+    like_users_count = serializers.IntegerField(source='likes_users.count', read_only=True)
+    new_created_at = serializers.SerializerMethodField()
+    new_updated_at = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
-        fields = ('title', 'content', 'comment_set', 'comment_count')
+        fields = '__all__'
+    
+    def get_new_created_at(self, obj):
+        return obj.created_at.strftime("%Y-%m-%d")
+    
+    def get_new_updated_at(self, obj):
+        return obj.updated_at.strftime("%Y-%m-%d")
 
 
 class CommentSerializer(serializers.ModelSerializer):

@@ -38,6 +38,7 @@ export const useCounterStore = defineStore('counter', () => {
       headers: {
         'Authorization': `Token ${token.value}`,
       }
+    })
       .then(response => {
         localStorage.removeItem('auth_token')
         token.value = null
@@ -46,7 +47,6 @@ export const useCounterStore = defineStore('counter', () => {
       .catch(error => {
         console.log(error)
       })
-    })
   }
 
   const signUp = function(payload) {
@@ -157,6 +157,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .catch((error) => {
       console.log(error)
+      toast.error('제목,나라 혹은 내용이 없습니다. 다시 시도해주세요.')
     })
   }
 
@@ -216,7 +217,14 @@ export const useCounterStore = defineStore('counter', () => {
      console.log(error)
    })
   }
+  
+  const isLogin = computed(()=>{
+    if (token.value===null) {
+    return false}
+    else {
+    return true}
+  })
 
-  return { articles, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav }
+  return { articles, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })
 

@@ -14,7 +14,7 @@
                 <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
-                <button @click="" class="btn btn-outline-light" style="border: black;">로그아웃</button>
+                <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
             </ul>
           </div>
@@ -25,7 +25,22 @@
 
 <script setup>
 import ArticleList from '@/components/ArticleList.vue';
+import { useCounterStore } from '@/stores/counter'
 
+const store = useCounterStore()
+
+const goidnav = ()=>{
+    store.goIndexNav()
+}
+const gocomunav = ()=>{
+    store.goCommunityNav()
+}
+const gopronav = ()=>{
+    store.goProfileNav()
+}
+const logout = ()=>{
+  store.logout()
+}
 </script>
 
 <style scoped>

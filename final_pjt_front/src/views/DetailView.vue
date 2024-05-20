@@ -6,15 +6,15 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav d-flex ms-auto">
+              <ul class="navbar-nav d-flex ms-auto">
             <li class="nav-item">
-                <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
+                <button @click.prevent="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
             </li>
             <li class="nav-item">
                 <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
-                <button @click="" class="btn btn-outline-light" style="border: black;">로그아웃</button>
+                <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
             </ul>
           </div>
@@ -75,8 +75,11 @@ import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios'
+import { useCounterStore } from '@/stores/counter'
 import router from '@/router';
 
+
+const store = useCounterStore()
 const route = useRoute()
 const article = ref(null)
 const comment = ref(null)
@@ -90,6 +93,7 @@ const createComment = function() {
     }
     store.createComment(payload)
 }
+
 
 
 onMounted(() => {
@@ -106,8 +110,19 @@ onMounted(() => {
     })
 })
 
-
-
+const goidnav = ()=>{
+    store.goIndexNav()
+}
+const gocomunav = ()=>{
+    console.log('gocomunav 확인')
+    store.goCommunityNav()
+}
+const gopronav = ()=>{
+    store.goProfileNav()
+}
+const logout = ()=>{
+  store.logout()
+}
 </script>
 
 <style scoped>

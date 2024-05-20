@@ -26,8 +26,10 @@
           </ArticleListItem>
           <hr>
         </div>
+        <div class="write-button-container">
+          <button @click="goCreate" class="write-button">글쓰기</button>
+        </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -36,11 +38,14 @@
 import { ref, onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter';
 import ArticleListItem from '@/components/ArticleListItem.vue';
+import router from '@/router';
 
 const store = useCounterStore()
 onMounted(() => {
   store.getArticles()
 })
+
+const goCreate = () => router.push({name:'CreateView'})
 </script>
 
 <style scoped>
@@ -68,7 +73,7 @@ onMounted(() => {
   background-color: white;
   width: 95%;
   border-radius: 1vw;
-  margin: 3% auto;
+  margin: 3% auto 1% auto;
   min-height: 90%;
 }
 .index-box{
@@ -100,6 +105,28 @@ onMounted(() => {
   font-size: 24px;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.write-button-container {
+  display: flex;
+  justify-content: flex-end;;
+  width: 100%;
+  margin-right: 5%;
+  margin-bottom: 1%;
+}
+
+.write-button {
+  background-color: #7979e9; /* Dark Blue */
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.write-button:hover {
+  background-color: #4e4eff; /* Medium Blue for hover effect */
 }
 
 @media screen and (max-width: 1800px) {

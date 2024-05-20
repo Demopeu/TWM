@@ -13,9 +13,12 @@
             <li class="nav-item">
                 <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
-        </ul>
-      </div>
-    </nav>
+            <li class="nav-item">
+                <button @click="" class="btn btn-outline-light" style="border: black;">로그아웃</button>
+            </li>
+            </ul>
+          </div>
+        </nav>
         <div @click="handleClick" ref="centeredElement " class="centered-element-north">
             <button value="north_america">N.America</button>
         </div>

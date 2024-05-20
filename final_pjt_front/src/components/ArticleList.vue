@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="logo-box">
-      <img class="img-logo" src="@/assets/Logo_black.png" alt="Logo_black.png">
-    </div>
     <div class="articleList-box">
       <div class="button-box">
       <div class="Nomal-button" style="background-color: #A7A7A7;">Global</div>
@@ -22,18 +19,11 @@
             <span class="index-item" style="flex: 2">작성일</span>
             <span class="index-item" style="flex: 1">좋아요</span>
           </div>
-          <div class="index-box" style="background-color: white;"> 
-            <ArticleListItem
-              v-for="article in store.articles"
+          <ArticleListItem
+            v-for="article in store.articles"
               :key="article.id"
-              :article="article"
-            />
-              <!-- <span class="index-item" style="flex: 2">{{ article.id }}</span>
-              <span class="index-item" style="flex: 3">{{ article.title }}</span>
-              <span class="index-item" style="flex: 2">{{ article.user.id }}</span>
-              <span class="index-item" style="flex: 2">{{ article.created_at }}</span>
-              <span v-if="article.likes"  class="index-item" style="flex: 1">{{ article.likes.length }}</span> -->
-          </div>
+              :article="article">
+          </ArticleListItem>
           <hr>
         </div>
       </div>
@@ -55,13 +45,11 @@ onMounted(() => {
 
 <style scoped>
 
-.logo-box {
-  margin-bottom: 20px;
-}
 .button-box{
   display: flex;
 }
 .articleList-box{
+  padding-top: 10vh;
   width: 80%;
   height: 100%;
   margin-left: auto;
@@ -125,12 +113,5 @@ onMounted(() => {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
-.img-logo {
-  
-  width: 19vh;
-  height: 7vh;
-  margin-left: 5vh;
-  margin-top: 30px;
 }
 </style>

@@ -8,7 +8,7 @@ export const useCounterStore = defineStore('counter', () => {
   const token = ref(null)
   const router = useRouter()
   const toast = useToast()
-  const articles = ref([])
+  const articles = ref()
 
   const login = function(payload) {
     const username = payload.username

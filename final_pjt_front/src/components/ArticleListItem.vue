@@ -12,9 +12,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import axios from 'axios';
 
 const props = defineProps({
   article: Object

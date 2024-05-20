@@ -9,6 +9,7 @@ export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
   const toast = useToast()
   const articles = ref()
+  const article = ref()
 
   const login = function(payload) {
     const username = payload.username
@@ -160,6 +161,63 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const createComment = function (payload) {
+    const content = payload.comment
+    const articleId = payload.articleId
+    const userId = payload.userId
+    axios({
+      method: 'post',
+      url: `http://127.0.0.1:8000/community/articles/${articleId}/comments/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      },
+      data: {
+        user_id: userId,
+        article_id: articleId,
+        content: content
+      }
+    })
+    .then(response => {
+      console.log('댓글이 등록되었습니다.')
+    })
+    .catch(error => {
+      console.log(error)
+
+    })
+  }
+
+  const deleteComment = function (commentId) {
+    axios({
+      method: 'delete',
+      url: `http://127.0.0.1:8000/community/comments/${commentId}/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+    .then(response => {
+      console.log('댓글이 삭제되었습니다.')
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  const likeButton = function (articleId) {
+    axios({
+      method: 'post',
+      url: `http://127.0.0.1:8000/community/articles/${articleId}/like/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+   .then(response => {
+     console.log('좋아요를 눌렀습니다.')
+   })
+   .catch(error => {
+     console.log(error)
+   })
+  }
+  
   const isLogin = computed(()=>{
     if (token.value===null) {
     return false}
@@ -167,6 +225,6 @@ export const useCounterStore = defineStore('counter', () => {
     return true}
   })
 
-  return { articles, createArticle, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  return { articles, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })
 

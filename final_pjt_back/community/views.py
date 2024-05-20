@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .serializers import ArticleSerializer, CommentSerializer, ArticleListSerializer, ArticleCreateSerializer
+from .serializers import ArticleSerializer, CommentSerializer, ArticleListSerializer, ArticleCreateSerializer, CommentCreateSerializer
 from .models import Article, Comment
 
 
@@ -90,7 +90,7 @@ def comment_detail(request, comment_pk):
 @api_view(['POST'])
 def comment_create(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
-    serializer = CommentSerializer(data=request.data)
+    serializer = CommentCreateSerializer(data=request.data, context={'request': request})
     if serializer.is_valid(raise_exception=True):
         serializer.save(article=article)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

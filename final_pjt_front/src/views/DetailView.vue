@@ -40,20 +40,28 @@
                     <h6>{{ article.new_created_at }}</h6>
                   </div>
                   <div style="display: flex;">
-                    <h6 v-if="article.likes" class="index-item" >좋아요 : {{ article.likes.length }}</h6>
-                    <h6 v-else class="index-item" >좋아요 : 0</h6>
-                    <h6 v-if="article.comments" class="index-item" >댓글 : {{ article.comments.length }}</h6>
-                    <h6 v-else class="index-item">댓글 : 0</h6>
+                    <h6 class="index-item" >좋아요 : {{ article.like_users_count }}</h6>
+                    <h6 class="index-item" >댓글 : {{ article.comment_count }}</h6>
                   </div>
                 </div>
                   <h3>{{ article.content }}</h3>
                   <div class="like-button-container">
-                    <button class="like-button"></button>
+                    <button class="like-button" @click="store.likeButton(article.id)"></button>
                   </div>
                   <hr style="margin: 0.5vh; color: #2FB2FC; border-width: 2px; border-style: solid;">
                     <div v-if="article.comment_set">
-                      <h6>{{ article.comment_set }}</h6>
-                  </div>
+                        <div v-for="comment in article.comment_set" :key="comment.id">
+                            <h6>{{ comment.user.username }}</h6>
+                            <h6>{{ comment.content }}</h6>
+                            <form @submit="store.deleteComment(comment.id)">
+                                <input type="submit" value="삭제">
+                            </form>
+                        </div>
+                    </div>
+                    <form @submit="createComment">
+                        <input type="text" v-model="comment">
+                        <input type="submit">
+                    </form>
             </div>
         </div>
       </div>
@@ -63,12 +71,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCounterStore } from '@/stores/counter';
 import axios from 'axios'
+import router from '@/router';
 
 const route = useRoute()
 const article = ref(null)
+const comment = ref(null)
+const store = useCounterStore()
+
+const createComment = function() {
+    const payload = {
+        userId: article.value.user.id,
+        articleId: article.value.id,
+        comment: comment.value
+    }
+    store.createComment(payload)
+}
+
 
 onMounted(() => {
     axios({
@@ -84,8 +106,8 @@ onMounted(() => {
     })
 })
 
-const username = ref('김동현')
-const created_at = ref('2024.05.06')
+
+
 </script>
 
 <style scoped>

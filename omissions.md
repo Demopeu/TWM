@@ -24,6 +24,10 @@
 
    - 임시로 유튜브 트레일러 받아오는 코드 detail페이지에 구현.
 
+5. DetailView.vue
+  
+   - submit이벤트 댓글 삭제, 작성 시 즉각 반영이 안되서 prevent 뺌
+
 # Back
 
 ## 영화 DB를 어떻게 공유하냐 -> 파일이 무거워서 git안됨 -> plug깔아서 일단 로컬에 넣자

@@ -3,10 +3,10 @@
     <RouterLink :to="{ name: 'DetailView', params: { articleId: article.id } }" class="index-link">
       <span class="index-item" style="flex: 2">{{ article.id }}</span>
       <span class="index-item" style="flex: 3">{{ article.title }}</span>
-      <span class="index-item" style="flex: 2">{{ username }}</span>
+      <span class="index-item" style="flex: 2">{{ article.user.username }}</span>
       <span class="index-item" style="flex: 2">{{ article.created_at }}</span>
-      <span v-if="article.likes" class="index-item" style="flex: 1">{{ article.likes.length }}</span>
-      <span v-else class="index-item" style="flex: 1">0</span>
+      <span class="index-item" style="flex: 1">{{ article.like_users_count }}</span>
+
     </RouterLink>
   </div>
 </template>

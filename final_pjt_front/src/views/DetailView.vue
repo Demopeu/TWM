@@ -36,8 +36,8 @@
                 <hr style="margin: 0.5vh;">
                 <div class="content-box">
                   <div style="display: flex;">
-                    <h6>{{ username }}</h6>
-                    <h6>{{ created_at }}</h6>
+                    <h6>{{ article.user.username }}</h6>
+                    <h6>{{ article.new_created_at }}</h6>
                   </div>
                   <div style="display: flex;">
                     <h6 v-if="article.likes" class="index-item" >좋아요 : {{ article.likes.length }}</h6>
@@ -71,12 +71,12 @@ const route = useRoute()
 const article = ref(null)
 
 onMounted(() => {
-    console.log(route)
     axios({
         method: 'get',
         url: `http://127.0.0.1:8000/community/articles/${route.params.articleId}/`
     })
     .then((response) => {
+        console.log(response.data)
         article.value = response.data
     })
     .catch((error) => {

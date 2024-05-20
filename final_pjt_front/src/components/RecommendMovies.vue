@@ -5,7 +5,7 @@
         <h1>{{ name }}</h1>
         </div>
         <div>
-            <div v-for="movie in store.movies":key="movie.id" :movie="movie">
+            <div v-for="movie in store.movies" :key="movie.id" :movie="movie">
                 <RouterLink :to="{ name: 'MovieDetail', params: { id: movie.id } }">
                     <img :src="movie.poster_image" alt="poster_image">
                 </RouterLink>

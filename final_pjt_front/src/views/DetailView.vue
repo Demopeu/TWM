@@ -46,7 +46,7 @@
                 </div>
                   <h3>{{ article.content }}</h3>
                   <div class="like-button-container">
-                    <button class="like-button" @click="store.likeButton(article.id)"></button>
+                    <button class="like-button" @click.prevent=pdtbutton(article.id)></button>
                   </div>
                   <hr style="margin: 0.5vh; color: #2FB2FC; border-width: 2px; border-style: solid;">
                     <div v-if="article.comment_set">
@@ -75,7 +75,6 @@ import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios'
-import { useCounterStore } from '@/stores/counter'
 import router from '@/router';
 
 
@@ -83,7 +82,6 @@ const store = useCounterStore()
 const route = useRoute()
 const article = ref(null)
 const comment = ref(null)
-const store = useCounterStore()
 
 const createComment = function() {
     const payload = {
@@ -94,7 +92,11 @@ const createComment = function() {
     store.createComment(payload)
 }
 
-
+const pdtbutton = (articleId) =>{
+    store.likeButton(articleId)
+    return article.value = response.data
+    
+}
 
 onMounted(() => {
     axios({

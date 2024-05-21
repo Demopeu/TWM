@@ -32,12 +32,21 @@
 
 # Back
 
-1. articles - 10개씩 받기
-
-## 영화 DB를 어떻게 공유하냐 -> 파일이 무거워서 git안됨 -> plug깔아서 일단 로컬에 넣자
-
 # Completed
+
+## back
 
 ~~시청 목록 구현 변경 : Detail page -> profile page에서 추가~~
 
 ~~commit merge 충돌 시 chome에서 merge 되지 않는 문제 : vscode에서 merge 하는 방법으로 대체~~
+
+~~articles - 10개씩 받기~~
+
+~~영화 DB를 어떻게 공유하냐 -> 파일이 무거워서 git안됨 -> plug깔아서 일단 로컬에 넣자~~
+
+## front
+
+
+~~4. RecommendMovies.vue~~
+
+   ~~- 해당 페이지에서 새로고침 하면 영화 목록이 사라짐 -> 추후 피니아 도입으로 해결 예정~~

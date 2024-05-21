@@ -9,7 +9,6 @@ export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
   const toast = useToast()
   const articles = ref()
-  const article = ref()
 
   const login = function(payload) {
     const username = payload.username
@@ -185,7 +184,6 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .catch(error => {
       console.log(error)
-
     })
   }
 
@@ -228,5 +226,25 @@ export const useCounterStore = defineStore('counter', () => {
     return true}
   })
 
-  return { articles, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  const addWatchedMovie = function(movieId) {
+    return axios({
+      method: 'post',
+      url: `http://127.0.0.1:8000/movies/${movieId}/add_to_watched/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      },
+      data: {
+        movie_id: movieId
+      }
+    })
+    .then(response => {
+      console.log('전달 완료');
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+
+  return { articles, addWatchedMovie, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })

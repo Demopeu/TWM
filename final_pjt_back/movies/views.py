@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,8 +11,8 @@ from .serializers import WishlistSerializer, MovieSerializer
 import requests
 from django.http import JsonResponse
 import time
-from urllib.parse import quote
 
+User = get_user_model()
 
 # Create your views here.
 @api_view(['POST'])
@@ -26,15 +28,15 @@ def add_to_wishlist(request, pk):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def add_to_watched(request):
-    movie_id = request.data.get('movie_id')
-    user_id = request.data.get('user_id')
+def add_to_watched(request, pk):
+    movie_id = pk
+    user_id = request.user.id
 
     wishlist_items = Wishlist.objects.filter(user_id=user_id, movie_id=movie_id)
 
     if wishlist_items.exists():
         wishlist_item = wishlist_items.first()
-        wishlist_item.is_watched = True
+        wishlist_item.is_watched = not wishlist_item.is_watched
         wishlist_item.save()
 
         serializer = WishlistSerializer(wishlist_item)
@@ -197,3 +199,12 @@ def movie_detail(request, movie_id):
     if request.method == 'GET':
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
+    
+@api_view(['GET'])
+def get_wishlist(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    wishlists = Wishlist.objects.filter(user=user)
+    serializer = WishlistSerializer(wishlists, many=True)
+    return Response(serializer.data)
+    
+

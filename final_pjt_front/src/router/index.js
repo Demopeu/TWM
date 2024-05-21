@@ -12,6 +12,7 @@ import RecommendMoviesDetail from '@/components/RecommendMoviesDetail.vue'
 import ArticleList from '@/components/ArticleList.vue'
 import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,6 +77,11 @@ const router = createRouter({
       path: '/community/create',
       name: 'CreateView',
       component: CreateView,
+    },
+    {
+      path: '/profile/:userId',
+      name: 'ProfileView',
+      component: ProfileView,
     }
   ]
 })

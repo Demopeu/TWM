@@ -34,7 +34,7 @@ def article_detail(request, article_pk):
         article.delete()
         print('printdeleteok')
         return Response(status=status.HTTP_204_NO_CONTENT)
-      
+
 
     elif request.method == 'PUT':
         print('printputteok')

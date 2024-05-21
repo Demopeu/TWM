@@ -26,7 +26,9 @@
 
 5. DetailView.vue
   
-   - submit이벤트 댓글 삭제, 작성 시 즉각 반영이 안되서 prevent 뺌
+   - submit이벤트 댓글 삭제, 작성, 좋아요 누를 시 즉각 반영이 안되서 prevent 뺌 - 대처 필요
+
+   - 수정 삭제 구현 필요
 
 # Back
 

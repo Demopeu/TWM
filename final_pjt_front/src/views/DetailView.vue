@@ -36,7 +36,9 @@
               <hr style="margin: 0.5vh;">
               <div class="content-box">
                 <div style="display: flex;">
-                  <h6>{{ article.user.username }}</h6>
+                  <RouterLink :to="{ name: 'ProfileView', params: { userId: article.user.id } }">
+                    <h6>{{ article.user.username }}</h6>
+                  </RouterLink>
                   <h6>{{ article.new_created_at }}</h6>
                 </div>
                 <div style="display: flex;">
@@ -75,7 +77,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, RouterLink } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios'
 import router from '@/router';

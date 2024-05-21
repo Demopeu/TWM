@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import  router  from './router/index.js'
 </script>
 
 <template>
@@ -12,6 +13,6 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 .container {
   max-width: 500px;
-  max-height: 1080px;
+  /* max-height: 1080px; */
 }
 </style>

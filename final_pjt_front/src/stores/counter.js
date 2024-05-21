@@ -113,9 +113,11 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .then((response) => {
         console.log('위시리스트에 담겼습니다')
+        toast.success('위시리스트에 담겼습니다')
     })
     .catch((error) => {
         console.log('이미 위시리스트에 담겨있습니다.')
+        toast.error('이미 위시리스트에 담겨있습니다.')
         console.log(error)
     })
   }
@@ -179,6 +181,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .then(response => {
       console.log('댓글이 등록되었습니다.')
+      console.log(response.data)
     })
     .catch(error => {
       console.log(error)

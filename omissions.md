@@ -28,6 +28,8 @@
   
    - submit이벤트 댓글 삭제, 작성 시 즉각 반영이 안되서 prevent 뺌
 
+   - 삭제버튼 없음
+
 # Back
 
 1. articles - 10개씩 받기

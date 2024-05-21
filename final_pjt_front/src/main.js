@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import "vue-toastification/dist/index.css"
 import Toast, { POSITION } from "vue-toastification"
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import Vuex from 'vuex'
 
 
 import App from './App.vue'
@@ -18,6 +19,6 @@ app.use(pinia)
 app.use(router)
 app.use(Toast, {
     position: POSITION.TOP_MIDDLE,
-  })
+})
 
 app.mount('#app')

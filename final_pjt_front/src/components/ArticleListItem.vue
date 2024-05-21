@@ -2,11 +2,10 @@
   <div class="index-box-in">
     <RouterLink :to="{ name: 'DetailView', params: { articleId: article.id } }" class="index-link">
       <span class="index-item" style="flex: 2">{{ article.id }}</span>
-      <span class="index-item" style="flex: 3">{{ article.title }}</span>
+      <span class="index-item" style="flex: 3">{{ article.title }}<span style="color: gray; margin-left: 1vh;">({{ article.country }})</span></span>
       <span class="index-item" style="flex: 2">{{ article.user.username }}</span>
       <span class="index-item" style="flex: 2">{{ article.new_created_at }}</span>
       <span class="index-item" style="flex: 1">{{ article.like_users_count }}</span>
-
     </RouterLink>
   </div>
 </template>

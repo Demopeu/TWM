@@ -16,6 +16,9 @@
             <li class="nav-item">
                 <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
+            <li class="nav-item">
+                <button @click="goback" class="btn btn-outline-light" style="border: black;">뒤로가기</button>
+            </li>
             </ul>
           </div>
         </nav>
@@ -24,9 +27,11 @@
 </template>
 
 <script setup>
-import ArticleList from '@/components/ArticleList.vue';
+import ArticleList from '@/components/ArticleList.vue'
 import { useCounterStore } from '@/stores/counter'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const store = useCounterStore()
 
 const goidnav = ()=>{
@@ -40,6 +45,9 @@ const gopronav = ()=>{
 }
 const logout = ()=>{
   store.logout()
+}
+const goback =()=>{
+  router.go(-1)
 }
 </script>
 
@@ -66,7 +74,7 @@ const logout = ()=>{
 }
 
 .navbar {
-  width: 99vw;
+  width: 100vw;
   padding: 0;
 }
 

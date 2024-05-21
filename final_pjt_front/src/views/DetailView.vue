@@ -11,11 +11,14 @@
               <button @click.prevent="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
           </li>
           <li class="nav-item">
-              <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
+              <button @click="gopronav(article.user.id)" class="btn btn-outline-light" style="border: black;">프로필</button>
           </li>
           <li class="nav-item">
               <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
           </li>
+          <li class="nav-item">
+                <button @click="goback" class="btn btn-outline-light" style="border: black;">뒤로가기</button>
+            </li>
           </ul>
         </div>
       </nav>
@@ -75,7 +78,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { useRoute, RouterLink } from 'vue-router';
+import { useRoute, RouterLink,useRouter } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios'
 import router from '@/router';
@@ -87,6 +90,7 @@ const article = ref(null)
 const comment = ref(null)
 const likeCountNumber = ref(0)
 const commentList = ref([])
+const routers = useRouter()
 
 const fetchArticleData = () => {
   axios({
@@ -147,11 +151,15 @@ const gocomunav = ()=>{
   console.log('gocomunav 확인')
   store.goCommunityNav()
 }
-const gopronav = ()=>{
-  store.goProfileNav()
+const gopronav = (useId)=>{
+  store.goProfileNav(useId)
 }
 const logout = ()=>{
 store.logout()
+}
+
+const goback =()=>{
+  routers.go(-1)
 }
 </script>
 

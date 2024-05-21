@@ -1,80 +1,89 @@
 <template>
     <div>
+        <div class="logo-container">
+          <img src="@/assets/Logo_white.png" alt="logo" class="logo">
+        </div>
+      <div class="box-box">
         <div class="title">
-        <h1>Movies set in</h1>
-        <h1>{{ name }}</h1>
+            <h1 class="title-text">Movies set in</h1>
+            <h1 class="title-text">{{ name }}</h1>
         </div>
-        <div>
-            <div v-for="movie in store.movies" :key="movie.id" :movie="movie">
-                <RouterLink :to="{ name: 'MovieDetail', params: { id: movie.id } }">
-                    <img :src="movie.poster_image" alt="poster_image">
-                </RouterLink>
-            </div>
+      </div>
+      <div class="movie-list-container">
+        <div class="movie-list">
+          <div class="movie-item" v-for="movie in store.movies" :key="movie.id">
+            <RouterLink :to="{ name: 'MovieDetail', params: { id: movie.id } }">
+              <img :src="movie.poster_image" alt="poster_image">
+            </RouterLink>
+          </div>
         </div>
-        <div class="movieLists">
-            <!-- <div v-for="movie in Store.movies" :key="movie.id" >
-                <div v-if="movie.poster_path" class="movie-card" @click="goDetailpage(movie.id)">
-                <img :src="getMoviePosterUrl(movie.poster_path)" alt="Movie Poster" class="movie-img"/>
-                </div>
-            </div> -->
-        </div>
+      </div>
     </div>
-</template>
+  </template>
+  
+  <script setup>
+  import { useCounterStore } from '@/stores/counter'
+  import { useRoute, RouterLink } from 'vue-router'
+  import { ref,onMounted } from 'vue'
+  
+  const store = useCounterStore()
+  const route = useRoute()
+  const name = route.params.country
+  const htmlName = ref()
 
-<script setup>
-import {ref} from 'vue'
-import { useCounterStore } from '@/stores/counter'
-import { useRoute, RouterLink } from 'vue-router'
-
-const store = useCounterStore()
-const route = useRoute()
-// const getMoviePosterUrl = (posterPath) => `https://image.tmdb.org/t/p/w500${posterPath}`;
-const name = route.params.country
-
-// Detailpage로 이동
-// const goDetailpage = (movieId)=> route.push(`/${movieId}`)
-
-// 영화리스트: movies;알고리즘을 통해 영화가 들어오는 함수:getMovies()
-// onMounted(()=>{
-//     movieStore.getMovies()
-// })
-
-</script>
-
-<style scoped>
-/* 박스 관련 */
-.title {
+  onMounted(() => {
+    htmlName.value = name
+    console.log(route)
+  })
+  </script>
+  
+  <style scoped>
+  .box-box {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5vh 5vh 5vh;
+  }
+  
+  .title {
     position: relative;
     min-width: 800px;
     height: 200px;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+  }
+
+  .title-text {
+  font-size: 90px;
+  font-weight: bold;
+  color: white;
 }
-/* 리스트 관련 */
-.movie-list{
+  
+  .logo-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .logo {
+    width: 190px;
+    height: auto;
+  }
+  
+  .movie-list-container {
+    position: relative; /* 상대 위치 설정 */
+  }
+  
+  .movie-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-
-}
-.movie-card{
-    flex-basis: calc(33.33% - 10px);
-    border: 1px solid #ccc;
-    padding: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .movie-item {
+    margin-right: 10px;
+  }
+  
+  .movie-item img {
     width: 200px;
-    height: 900px;
-    
-}
-.movie-img{
-    width: 100%;
-}
-
-/* 글씨체 관련 */
-h1{
-    font-weight: bold;
-    margin-left: 5vh;
-    font-size: 128px;
-    letter-spacing: -5px;
-    color: white;
-    top: 50%;
-    transform: translateY(100%);
-}
-</style>
+  }
+  </style>

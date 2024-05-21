@@ -66,7 +66,7 @@ const router = createRouter({
           component: RecommendMovies,
         },
         {
-          path: '/movies/:id',
+          path: '/movies/:country/:id',
           name: 'MovieDetail',
           component: RecommendMoviesDetail,
         },
@@ -89,5 +89,4 @@ router.beforeEach((to,from)=>{
     return {name: 'login'}
   }
 })
-
 export default router

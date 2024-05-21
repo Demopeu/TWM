@@ -1,7 +1,7 @@
 <template>
   <div class="container min-vw-100 min-vh-100">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-          <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png" @click="goidnav">
+          <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -21,13 +21,8 @@
       </nav>
       <div class="articleList-box">
           <div class="button-box">
-          <div class="Nomal-button" style="background-color: #A7A7A7;">Global</div>
-          <div class="Nomal-button" style="background-color: #FFAFAF;">N.America</div>
-          <div class="Nomal-button" style="background-color: #FFEDAF;">S.America</div>
-          <div class="Nomal-button" style="background-color: #CFE4C5;">Europe</div>
-          <div class="Nomal-button" style="background-color: #AFBCFF;">India</div>
-          <div class="Nomal-button" style="background-color: #F4AFFF;">Korea</div>
-          <div class="Nomal-button" style="background-color: #FF6767;">Japan</div>
+          <div class="Nomal-button" style="background-color: #F4AFFF;">수정</div>
+          <div class="Nomal-button" style="background-color: #FF6767;">삭제</div>
           </div>
           <div class="articleList-List-box">
           <div class="articleList-List-box-in">
@@ -44,26 +39,29 @@
                   <h6 class="index-item" >댓글 : {{ article.comment_count }}</h6>
                 </div>
               </div>
-                <h3>{{ article.content }}</h3>
+                <h4>{{ article.content }}</h4>
                 <div class="like-button-container">
                   <button class="like-button" @click.prevent=pdtbutton(article.id)></button>
                 </div>
                 <hr style="margin: 0.5vh; color: #2FB2FC; border-width: 2px; border-style: solid;">
-                  <div v-if="article.comment_set">
-                      <div v-for="comment in article.comment_set" :key="comment.id">
-                        <div style="display: flex;">
-                          <h6>{{ comment.user.username }}</h6>
-                          <h6>{{ comment.content }}</h6>
-                          <form @submit="store.deleteComment(comment.id)">
-                              <input type="submit" value="삭제">
-                          </form>
-                        </div>
-                        <hr>
-                      </div>
+                <div v-if="commentList.length">
+                  <div v-for="comment in commentList" :key="comment.id" style="margin-top: 1vh;">
+                    <div style="display: flex;">
+                      <h6 style="flex: 1;">{{ comment.user.username }}</h6>
+                      <h6 style="flex: 4;">{{ comment.content }}</h6>
+                      <form @submit="deleteComment(comment.id)" style="flex: 0.5;">
+                        <input type="submit" value="X" style="height: 3vh; width: auto;">
+                      </form>
+                    </div>
+                    <hr>
                   </div>
-                  <form @submit="createComment">
-                      <input type="text" v-model="comment">
-                      <input type="submit">
+                </div>
+                <div v-else style="margin-top: 1vh;">
+                  <h6>첫 댓글을 달아주세요!</h6>
+                </div>
+                  <form @submit="createComment" style="margin: 1vh 0 1vh 2vh;">
+                      <input type="text" v-model="comment" style="width: 70%; border-radius: 5vh;">
+                      <input type="submit" style="margin-left: 3vh;" class="write-button">
                   </form>
           </div>
       </div>
@@ -86,49 +84,59 @@ const route = useRoute()
 const article = ref(null)
 const comment = ref(null)
 const likeCountNumber = ref(0)
+const commentList = ref([])
 
-const createComment = function() {
-  const payload = {
-      userId: article.value.user.id,
-      articleId: article.value.id,
-      comment: comment.value
-  }
-  store.createComment(payload)
-}
-
-
-// 비동기식이라 가끔 정상적으로 작동을 안함
-const pdtbutton = (articleId) =>{
-    store.likeButton(articleId)
-    axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/community/articles/${route.params.articleId}/`
-    })
-    .then((response) => {
-        console.log("잘눌러짐")
-        article.value = response.data
-        likeCountNumber.value = computed(() => article.value ? article.value.like_users_count : 0)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-    
-}
-
-onMounted(() => {
+const fetchArticleData = () => {
   axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/community/articles/${route.params.articleId}/`
+    method: 'get',
+    url: `http://127.0.0.1:8000/community/articles/${route.params.articleId}/`
   })
   .then((response) => {
-      console.log(response.data)
-      article.value = response.data
-      likeCountNumber.value = article.value.like_users_count
+    console.log(response.data)
+    article.value = response.data
+    likeCountNumber.value = article.value.like_users_count
+    commentList.value = response.data.comment_set
   })
   .catch((error) => {
-      console.log(error)
+    console.log(error)
   })
-})
+}
+
+const createComment = async () => {
+  const payload = {
+    userId: article.value.user.id,
+    articleId: article.value.id,
+    comment: comment.value
+  };
+  try {
+    await store.createComment(payload)
+    comment.value = ''
+    await fetchArticleData()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteComment = async (commentId) => {
+  try {
+    await store.deleteComment(commentId)
+    await fetchArticleData()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// 비동기식이라 가끔 정상적으로 작동을 안함
+const pdtbutton = async (articleId) => {
+  try {
+    await store.likeButton(articleId)
+    await fetchArticleData()
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+onMounted(fetchArticleData)
 
 const goidnav = ()=>{
   store.goIndexNav()
@@ -244,8 +252,9 @@ font-weight: bold;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
-padding-top: 1vh;
-padding-left: 2vh;
+padding-top: 2vh;
+padding-left: 3vh;
+padding-bottom: 1vh;
 }
 h3{
 white-space: nowrap;
@@ -254,6 +263,12 @@ text-overflow: ellipsis;
 padding-left: 2vh;
 padding-top: 3vh;
 letter-spacing: -2px;
+}
+h4 {
+  overflow: hidden;
+  padding-left: 2vh;
+  padding-top: 3vh;
+  word-wrap: break-word;
 }
 h6 {
 font-weight: bold;
@@ -299,6 +314,21 @@ top: 70%;
 left: 50%;
 transform: translate(-50%, -15%);
 white-space: nowrap;
+}
+
+.write-button {
+  background-color: #7979e9; /* Dark Blue */
+  color: white;
+  padding: 5px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.write-button:hover {
+  background-color: #4e4eff; /* Medium Blue for hover effect */
 }
 
 </style>

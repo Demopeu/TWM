@@ -1,14 +1,12 @@
 <template>
     <div class="back-container">
-      <div class="flex-container">
-        <div class="black-squre"></div>
+      <div class="black-squre"></div>
         <div class="gray-squre">
           <div class="main-container">
             <div class="profile-image-info">
               <span><img src="@/assets/Profile_image.jpg" class="profile-image" alt="profile_image"></span>
               <span class="profile-info" v-if="user && wishlist">
                 <h1 class="profile-username">{{ user.username }}</h1>
-                <hr>
                 <div class="profile-email">
                   <div>E-mail : {{ user.email }}</div>
                   <div>최근접속 : {{ formatDate }}</div>
@@ -16,16 +14,21 @@
               </span>
               <span><img src="@/assets/Logo_black.png" alt="logo_image" class="logo-image"></span>
             </div>
-            <hr>
             <div class="page-container">
               <div class="trophy-display" v-if="userTrophys">
                 <div class="trophy-card"  v-for="userTrophy in userTrophys">
                   <div class="trophy-info">
+                    <div class="trophy-icon">
+                      <img src="@/assets/Star_image.png" alt="star_icon" class="star-icon">
+                    </div>
+                    <div class="trophy-description"><span class="trophy-name">{{ user.username }}</span>님은</div>
                     <div class="trophy-title">{{ userTrophy }}</div>
+                    <div class="trophy-description">의 리뷰왕으로 선정되셨습니다!</div>
                   </div>
                 </div>
               </div>
             </div>
+            
             <div class="section-title">
               위시리스트 영화 목록
             </div>
@@ -51,7 +54,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
 </template>
 
@@ -131,36 +133,43 @@ const fetchWishlist = () => {
 
 <style scoped>
 .back-container {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: auto;
-}
-
-.flex-container {
-  display:flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
 .black-squre {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 30%;
+  height: 100%;
   background-color: #494949;
+  z-index: 1;
 }
 
 .gray-squre {
-  width: 70%;
+  position: relative;
+  width: 90%;
+  height: calc(100% - 10%); /* 상하단 여백을 위해 전체 높이에서 10%를 뺌 */
+  margin: 5% auto; /* 상하단 여백 5%씩, 좌우 중앙 정렬 */
   background-color: #D9D9D9;
-  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  box-sizing: border-box;
 }
+
 .main-container {
-  width: 60%;
+  position: relative;
+  width: 70%;
   padding: 5%;
   background-color: white;
   border-radius: 10px;
+  z-index: 3;
+  margin-top: 20px; /* 위쪽 여백 */
+  margin-bottom: 20px; /* 아래쪽 여백 */
 }
 
 .profile-image-info {
@@ -191,9 +200,10 @@ const fetchWishlist = () => {
   .profile-info {
     display: flex;
   }
-}
-@media (min-width: 1300px) {
   .profile-email {
+    margin-left: 50px
+  }
+  .profile-username {
     margin-left: 50px
   }
 }
@@ -202,6 +212,12 @@ const fetchWishlist = () => {
 .logo-image {
   width: auto;
   height: 5vh;
+}
+
+@media (max-width: 1200px) {
+  .logo-image {
+    display: none;
+  }
 }
 
 .profile-username {
@@ -213,6 +229,19 @@ const fetchWishlist = () => {
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 30px;
+}
+
+.trophy-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.star-icon {
+  width: 100%;
+  height: 100%;
 }
 
 .trophy-display {
@@ -245,6 +274,7 @@ const fetchWishlist = () => {
 
 .trophy-title {
   font-size: 1.5em;
+  font-weight: bold;
   margin: 10px 0;
   color: #333;
 }
@@ -252,6 +282,12 @@ const fetchWishlist = () => {
 .trophy-description {
   font-size: 1em;
   color: #777;
+}
+
+.trophy-name {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
 }
 
 .movie-poster {

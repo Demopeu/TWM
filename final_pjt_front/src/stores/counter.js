@@ -9,6 +9,7 @@ export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
   const toast = useToast()
   const articles = ref()
+  const userId = ref(null)
 
   const login = function(payload) {
     const username = payload.username
@@ -29,6 +30,22 @@ export const useCounterStore = defineStore('counter', () => {
         toast.error("인증 정보가 정확하지 않습니다. 다시 시도해주세요.")
       })
   }
+
+  const fetchUserProfile = function() {
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/accounts/user/',
+      headers: {
+        'Authorization': `Token ${token.value}`
+      }
+    })
+    .then(response => {
+      userId.value = response.data.pk;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
   
   const logout = function() {
     axios({
@@ -41,6 +58,7 @@ export const useCounterStore = defineStore('counter', () => {
       .then(response => {
         localStorage.removeItem('auth_token')
         token.value = null
+        userId.value = null
         router.push({ name:'login' })
       })
       .catch(error => {
@@ -246,5 +264,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
 
-  return { articles, addWatchedMovie, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  return { articles, addWatchedMovie, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })

@@ -16,6 +16,9 @@
             <li class="nav-item">
                 <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
+            <li class="nav-item">
+                <button @click="goback" class="btn btn-outline-light" style="border: black;">뒤로가기</button>
+            </li>
             </ul>
           </div>
         </nav>
@@ -92,6 +95,9 @@ const gopronav = ()=>{
 }
 const logout = ()=>{
   store.logout()
+}
+const goback =()=>{
+  router.go(-1)
 }
 
 </script>

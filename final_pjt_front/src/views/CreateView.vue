@@ -16,6 +16,9 @@
             <li class="nav-item">
                 <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
             </li>
+            <li class="nav-item">
+                <button @click="goback" class="btn btn-outline-light" style="border: black;">뒤로가기</button>
+            </li>
             </ul>
           </div>
         </nav>
@@ -65,10 +68,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useCounterStore } from '@/stores/counter';
+import { useRouter } from 'vue-router'
 const title = ref(null)
 const content = ref(null)
 const country = ref(null)
 const store = useCounterStore()
+const router = useRouter()
 
 const createArticle = function () {
   const payload = {
@@ -95,6 +100,9 @@ const gopronav = ()=>{
 }
 const logout = ()=>{
   store.logout()
+}
+const goback =()=>{
+  router.go(-1)
 }
 </script>
 

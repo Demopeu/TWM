@@ -9,32 +9,45 @@
             <h1 class="title-text">{{ name }}</h1>
         </div>
       </div>
-      <div class="movie-list-container">
-        <div class="movie-list">
-          <div class="movie-item" v-for="movie in store.movies" :key="movie.id">
-            <RouterLink :to="{ name: 'MovieDetail', params: { id: movie.id } }">
-              <img :src="movie.poster_image" alt="poster_image">
-            </RouterLink>
+      <div class="movie-list-container swiper-container" ref="scrollContainer">
+      <div class="movie-list swiper-wrapper">
+        <div v-for="movie in store.movies" :key="movie.id" class="movie-item swiper-slide">
+          <div class="movie-item-inner" @click="goToMovieDetail(movie.id)">
+            <img :src="movie.poster_image" alt="poster_image">
           </div>
         </div>
       </div>
+    </div>
     </div>
   </template>
   
   <script setup>
   import { useCounterStore } from '@/stores/counter'
-  import { useRoute, RouterLink } from 'vue-router'
+  import { useRoute, RouterLink,useRouter } from 'vue-router'
   import { ref,onMounted } from 'vue'
+  import Swiper from 'swiper/bundle'
   
   const store = useCounterStore()
   const route = useRoute()
   const name = route.params.country
-  const htmlName = ref()
+  const router = useRouter()
 
   onMounted(() => {
-    htmlName.value = name
-    console.log(route)
-  })
+  new Swiper('.movie-list-container', {
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+    freeMode: true,
+    grabCursor: true,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      hide: false,
+    },
+  });
+})
+
+const goToMovieDetail = (movieId) => {
+  router.push({ name: 'MovieDetail', params: { id: movieId } })
+}
   </script>
   
   <style scoped>
@@ -70,13 +83,13 @@
   }
   
   .movie-list-container {
-    position: relative; /* 상대 위치 설정 */
+    position: relative;
   }
   
   .movie-list {
     display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    /* overflow-x: auto; */
+    /* -webkit-overflow-scrolling: touch; */
   }
   
   .movie-item {

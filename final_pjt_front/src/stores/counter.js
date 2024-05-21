@@ -11,6 +11,7 @@ export const useCounterStore = defineStore('counter', () => {
   const articles = ref()
   const userId = ref(null)
 
+
   const login = function(payload) {
     const username = payload.username
     const password = payload.password
@@ -24,6 +25,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then(response => {
         token.value = response.data.key
+        console.log(response)
         router.push({ name:'selectcountry' })
       })
       .catch(error => {
@@ -114,7 +116,9 @@ export const useCounterStore = defineStore('counter', () => {
   const goCommunityNav = () => {router.push({ name: 'community' })}
   const goIndexNav = () => {router.push({ name: 'login' })}
   // 임시
-  const goProfileNav = () => {router.push({ name: 'community' })}
+  const goProfileNav = (userId) => {
+    router.push({ name: 'ProfileView', params: { userId: userId } });
+  }
   
     const addWishList = (movieId) => {
     console.log(token.value)

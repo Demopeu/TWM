@@ -9,7 +9,7 @@
         <p class="movie-overview">{{ movie.overview }}</p>
         <button class="btn-trailer" @click="openYoutube">
             <img src="@/assets/Youtube.png" alt="Trailer Icon" class="button-icon">
-          예고편 짜잔
+          예고편 보러가기
         </button>
         <button class="btn-wishlist" @click="store.addWishList(movie.id)">
             <img src="@/assets/WishList.png" alt="Trailer Icon" class="button-icon">

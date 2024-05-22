@@ -131,8 +131,6 @@ const deleteComment = async (commentId) => {
     console.log(error)
   }
 }
-
-// 비동기식이라 가끔 정상적으로 작동을 안함
 const pdtbutton = async (articleId) => {
   try {
     await store.likeButton(articleId)

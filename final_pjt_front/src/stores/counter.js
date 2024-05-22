@@ -9,7 +9,7 @@ export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
   const toast = useToast()
   const articles = ref()
-  const userId = ref(null)
+  const userId = ref()
 
 
   const login = function(payload) {
@@ -42,7 +42,8 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
     .then(response => {
-      userId.value = response.data.pk;
+      userId.value = response.data.pk
+      console.log(response.data)
     })
     .catch(error => {
       console.log(error);
@@ -116,8 +117,10 @@ export const useCounterStore = defineStore('counter', () => {
   const goCommunityNav = () => {router.push({ name: 'community' })}
   const goIndexNav = () => {router.push({ name: 'login' })}
   // 임시
-  const goProfileNav = (userId) => {
-    router.push({ name: 'ProfileView', params: { userId: userId } });
+  const goProfileNav = (realuserId = userId.value) => {
+    console.log(userId.value)
+    console.log(realuserId)
+    router.push({ name: 'ProfileView', params: { userId: realuserId } });
   }
   
     const addWishList = (movieId) => {

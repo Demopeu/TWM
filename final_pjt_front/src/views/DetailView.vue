@@ -135,7 +135,6 @@ const goUpdatePage = (articleId) => {
   router.push({ name: 'UpdateView', params: { articleId: articleId } })
 }
 
-// 비동기식이라 가끔 정상적으로 작동을 안함
 const pdtbutton = async (articleId) => {
   try {
     await store.likeButton(articleId)

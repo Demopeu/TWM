@@ -150,4 +150,7 @@ span{
     color: blue;
     text-decoration: underline;
 }
+span:hover {
+    cursor: pointer;
+}
 </style>

@@ -100,5 +100,9 @@ router.beforeEach((to,from)=>{
     toast.error("로그인이 필요합니다.")
     return {name: 'login'}
   }
+  if (store.token !== null && to.name === 'login') {
+    toast.info("이미 로그인된 상태입니다.")
+    return false
+  }
 })
 export default router

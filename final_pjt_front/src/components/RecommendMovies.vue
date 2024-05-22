@@ -18,6 +18,10 @@
         </div>
       </div>
     </div>
+    <div class="btn-box">
+      <button class="btn-else" @click="goSelectCountry">나라 선택</button>
+      <button class="btn-else" @click="gocomunav">게시판 이동</button>
+    </div>
     </div>
   </template>
   
@@ -47,6 +51,13 @@
 
 const goToMovieDetail = (movieId) => {
   router.push({ name: 'MovieDetail', params: { id: movieId } })
+}
+
+const goSelectCountry = () => {
+  router.push({ name: 'selectcountry' })
+}
+const gocomunav = ()=>{
+    store.goCommunityNav()
 }
   </script>
   
@@ -99,4 +110,32 @@ const goToMovieDetail = (movieId) => {
   .movie-item img {
     width: 200px;
   }
+
+  .btn-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5vh;
+    margin-bottom: 5h;
+  }
+
+
+.btn-else {
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 1.2em;
+  margin: 10px 5px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn-else:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
   </style>

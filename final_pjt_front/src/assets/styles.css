@@ -1,0 +1,21 @@
+.fade-enter-active{
+  transition: opacity 1.5s ease;
+}
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from{
+  opacity: 0; /* 요소가 나타날 때 투명도를 0으로 서서히 증가 */
+}
+
+.fade-enter-to{
+  opacity: 1; /* 요소가 나타날 때 투명도를 1으로 서서히 증가 */
+}
+
+.fade-leave-from{
+  opacity: 1; /* 요소가 나타날 때 ��명도를 1으로 서서히 증가 */
+}
+.fade-leave-to{
+  opacity: 0; /* 요소가 나타날 때 ��명도를 0으로 서서히 ���가 */
+}

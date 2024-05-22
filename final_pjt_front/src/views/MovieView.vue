@@ -25,6 +25,10 @@ body, .wrapper {
     height: 100vh;
     overflow: auto;
     position: relative;
+    background-image:url('@/assets/MovieBack.jpg');
+    background-repeat: no-repeat;
+    background-position: 80% 10%;
+    background-size: 40%;
 }
 
 </style>

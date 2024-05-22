@@ -18,7 +18,7 @@
                 <div class="input-button-container">
                     <button type="submit">Login</button>
                     <h6 style="margin-left: auto">Not a member yet? 
-                    <span @click="goToSignUp" >Register!</span>
+                    <span style="cursor: pointer;" @click="goToSignUp" >Register!</span>
                     </h6>
                 </div>               
             </form>

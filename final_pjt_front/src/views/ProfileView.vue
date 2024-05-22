@@ -94,7 +94,6 @@ onMounted(() => {
         userTrophys.value = response.data.trophys.split(',').map(trophy => trophy.trim().replace(/^'|'$/g, ""));
       }
       formattedDate(user.value.date_joined)
-      console.log(userTrophys.value)
     })
     .catch(error => {
       console.log(error);
@@ -108,7 +107,6 @@ onMounted(() => {
   })
   .then((response) => {
       wishlist.value = response.data;
-      console.log(wishlist.value)
   })
   .catch((error) => {
     console.log(error);

@@ -103,8 +103,11 @@ export const useCounterStore = defineStore('counter', () => {
   const goRecommendedMovie = function (region) {
     const country = region
     axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/recommend/${country}/`,
+      method: 'get',
+      url: `http://127.0.0.1:8000/movies/recommend/${country}/`,
+      headers: {
+        'Authorization': `Token ${token.value}`,
+      }
     })
     .then(response => {
         movies.value = response.data
@@ -124,7 +127,6 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
     const addWishList = (movieId) => {
-    console.log(token.value)
     axios({
         method: 'post',
         url: `http://127.0.0.1:8000/movies/${movieId}/add_to_wishlist/`,

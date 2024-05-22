@@ -15,7 +15,7 @@
               <span><img src="@/assets/Logo_black.png" alt="logo_image" class="logo-image"></span>
             </div>
             <div class="page-container">
-              <div class="trophy-display" v-if="userTrophys">
+              <div class="trophy-display" v-if="userTrophys && user">
                 <div class="trophy-card"  v-for="userTrophy in userTrophys">
                   <div class="trophy-info">
                     <div class="trophy-icon">
@@ -24,6 +24,15 @@
                     <div class="trophy-description"><span class="trophy-name">{{ user.username }}</span>님은</div>
                     <div class="trophy-title">{{ userTrophy }}</div>
                     <div class="trophy-description">의 리뷰왕으로 선정되셨습니다!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="trophy-display" v-if="userTrophys === null && user">
+                <div class="trophy-card"  v-for="_ in 1">
+                  <div class="trophy-info">
+                    <div class="trophy-description"><span class="trophy-name">{{ user.username }}</span>님은</div>
+                    <div class="trophy-title">받은 상이 없어요</div>
+                    <div class="trophy-description" style="color:blue">8ㅅ8</div>
                   </div>
                 </div>
               </div>
@@ -81,11 +90,11 @@ onMounted(() => {
   })
    .then(response => {
       user.value = response.data;
-      console.log(user.value);
       if (response.data.trophys) {
         userTrophys.value = response.data.trophys.split(',').map(trophy => trophy.trim().replace(/^'|'$/g, ""));
       }
       formattedDate(user.value.date_joined)
+      console.log(userTrophys.value)
     })
     .catch(error => {
       console.log(error);

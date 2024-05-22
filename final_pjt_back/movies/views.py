@@ -1,7 +1,9 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,8 +11,8 @@ from rest_framework import status
 from .models import Movie, Wishlist
 from .serializers import WishlistSerializer, MovieSerializer
 import requests
-from django.http import JsonResponse
 import time
+import random
 
 User = get_user_model()
 
@@ -20,11 +22,28 @@ User = get_user_model()
 def add_to_wishlist(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     user = request.user
+
     if Wishlist.objects.filter(movie_id=pk, user=user).exists():
         return Response({'detail': 'Movie already in wishlist.'}, status=status.HTTP_400_BAD_REQUEST)
     
     Wishlist.objects.create(movie=movie, user=user, is_watched=False)
+
     return Response({'detail': 'Movie added to wishlist.'}, status=status.HTTP_200_OK)
+
+
+@receiver(post_save, sender=Wishlist)
+def update_user_like_genres(sender, instance, created, **kwargs):
+    if created:  # 새로운 위시리스트 항목이 생성된 경우에만 실행
+        user = instance.user
+        movie_genres = instance.movie.genre.split(',')  # 영화의 장르를 가져옴
+        for genre in movie_genres:
+            genre = genre.strip()
+            if genre in user.like_genres:
+                user.like_genres[genre] += 1  # 장르가 이미 있다면 카운트 증가
+            else:
+                user.like_genres[genre] = 1  # 새로운 장르면 카운트 초기화
+        user.save()
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -51,7 +70,7 @@ def get_genre_mapping(api_key):
     base_url = 'https://api.themoviedb.org/3/genre/movie/list'
     params = {
         'api_key': api_key,
-        'language': 'ko-KR',
+        'language': 'en-US',
     }
     response = requests.get(base_url, params=params)
     data = response.json()
@@ -169,7 +188,9 @@ def fetch_movies_from_tmdb(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def recommend_movies(request, country):
+    user = User.objects.get(pk=request.user.id)
     if request.method == 'GET':
         if country == 'north_america':
             country = ['US', 'CA', 'MX']
@@ -186,11 +207,56 @@ def recommend_movies(request, country):
         elif country == 'japan':
             country = ['JP']
         
+        user_wishlist = list(Wishlist.objects.filter(user=user).values_list('movie_id', flat=True))
+        print(user_wishlist)
+        
+        # DB에서 요청하는 사람의 위시리스트에 영화를 제외하고 각 국가별 영화를 선별해서 리스트에 넣는다.
         result = []
         for cont in country:
             movies = Movie.objects.filter(country=cont)
-            result.extend(movies)
-        serializer = MovieSerializer(result, many=True)
+            for movie in movies:
+                if movie.id not in user_wishlist:
+                    result.append(movie)
+
+        # 만일 유저가 선호하는 장르에 최소 3개 이상의 장르 정보가 쌓였다면 해당 장르를 기준으로 영화를 추천해준다.
+        if len(user.like_genres) >= 3:
+            sorted_genres = sorted(user.like_genres.items(), key=lambda x: x[1], reverse=True)
+
+            sorted_results = [[] for i in range(4)]
+            for movie in result:
+                weight = 0
+                if sorted_genres[0][0] in movie.genre:
+                    weight += 3
+                if sorted_genres[1][0] in movie.genre:
+                    weight += 2
+                if sorted_genres[2][0] in movie.genre:
+                    weight += 1
+                # 가중치가 0, 1~2, 3~4, 5~6인 영화를 나눔
+                sorted_results[(weight+1) // 2].append(movie)
+            
+            for sublist in sorted_results:
+                random.shuffle(sublist)
+
+            first_movie = len(sorted_results[3])
+            second_movie = len(sorted_results[2])
+            third_movie = len(sorted_results[1])
+            forth_movie = len(sorted_results[0])
+            recommend_movies = 0
+            if first_movie + second_movie + third_movie + forth_movie <= 50:
+                recommend_movies = sorted_results[3] + sorted_results[2] + sorted_results[1] + sorted_results[0]
+
+            else:
+                sub_results = [[] for _ in range(4)]
+                while sub_results < 50:
+                    for i in range(3, -1, -1):
+                        if sorted_results[i]:
+                            sub_results[i].append(sorted_results[i].pop())
+
+                        if sub_results == 50:
+                            break
+                recommend_movies = sub_results[3] + sub_results[2] + sub_results[1] + sub_results[0]
+
+        serializer = MovieSerializer(recommend_movies, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])

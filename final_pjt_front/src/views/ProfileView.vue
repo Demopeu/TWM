@@ -4,12 +4,19 @@
         <div class="gray-squre">
           <div class="main-container">
             <div class="profile-image-info">
-              <span><img src="@/assets/Profile_image.jpg" class="profile-image" alt="profile_image"></span>
+              <span v-if="profileImage"><img class="profile-image" alt="profile_image" :src=profileImage></span>
               <span class="profile-info" v-if="user && wishlist">
-                <h1 class="profile-username">{{ user.username }}</h1>
+                <h2 class="profile-username">{{ user.username }}</h2>
+                <hr>
                 <div class="profile-email">
-                  <div>E-mail : {{ user.email }}</div>
-                  <div>최근접속 : {{ formatDate }}</div>
+                  <div class="email-info">
+                    <span class="email-label">E-mail:</span>
+                    <span class="email-text">{{ user.email }}</span>
+                  </div>
+                  <div class="last-login-info">
+                    <span class="last-login-label">최근 접속:</span>
+                    <span class="last-login-text">{{ formatDate }}</span>
+                  </div>
                 </div>
               </span>
               <span><img src="@/assets/Logo_black.png" alt="logo_image" class="logo-image"></span>
@@ -38,8 +45,26 @@
               </div>
             </div>
             
-            <div class="section-title">
-              위시리스트 영화 목록
+            <div class="section-container">
+              <div class="section-title">
+                위시리스트 영화 목록
+              </div>
+              <div class="tooltip-container">
+                <button class="tooltip-icon" @click="openModal">
+                  <span class="button-text">?</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal" v-if="modalOpen" @click.self="closeModal">
+              <div class="modal-content">
+                <span class="close" @click="closeModal">&times;</span>
+                <p style="font-weight:bold; text-align: center;">
+                  담겨진 영화를 클릭해보세요!
+                  <br>
+                  <br>
+                  본 영화 목록을 수정할 수 있어요!
+                </p>
+              </div>
             </div>
             <div v-if="wishlist" class="wishlist">
               <div v-for="movie in wishlist" :key="movie.id">
@@ -71,6 +96,16 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
+import image1 from '@/assets/profile/image1.jpg';
+import image2 from '@/assets/profile/image2.jpg';
+import image3 from '@/assets/profile/image3.jpg';
+import image4 from '@/assets/profile/image4.jpg';
+import image5 from '@/assets/profile/image5.jpg';
+import image6 from '@/assets/profile/image6.jpg';
+import image7 from '@/assets/profile/image7.jpg';
+import image8 from '@/assets/profile/image8.jpg';
+import image9 from '@/assets/profile/image9.jpg';
+import image10 from '@/assets/profile/image10.jpg';
 
 const route = useRoute();
 const user = ref(null)
@@ -78,10 +113,33 @@ const userTrophys = ref(null)
 const wishlist = ref(null)
 const store = useCounterStore();
 const formatDate = ref(null)
+const profileImage = ref(null)
 
 const formattedDate = function (date) {
   formatDate.value = date.substring(0, 10);
 }
+
+const imageList = [
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+  image8,
+  image9,
+  image10,
+
+];
+const setRandomProfileImage = async () => {
+      const randomIndex = Math.floor(Math.random() * imageList.length);
+      const randomImage = imageList[randomIndex];
+      profileImage.value = randomImage;
+    };
+onMounted(() => {
+  setRandomProfileImage()
+})
 
 onMounted(() => {
   axios({
@@ -136,9 +194,84 @@ const fetchWishlist = () => {
   })
 }
 
+const modalOpen = ref(false);
+
+const openModal = () => {
+  modalOpen.value = true;
+}
+
+const closeModal = () => {
+  modalOpen.value = false;
+}
+
 </script>
 
 <style scoped>
+.section-container {
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-container {
+  margin-left: 10px; /* 버튼과 목록 사이의 간격 조절 */
+}
+
+.tooltip-icon {
+  background-color: #4CAF50; /* 버튼 배경색 */
+  border: none;
+  color: white; /* 버튼 텍스트 색상 */
+  padding: 4px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px; /* 버튼 텍스트 크기 */
+  border-radius: 100%; /* 버튼 모서리 둥글게 */
+  cursor: pointer;
+}
+
+.button-text {
+  font-size: 11px; /* 버튼 내 텍스트 크기 */
+}
+
+.tooltip-icon:hover {
+  background-color: #45a049; /* 마우스를 올렸을 때 배경색 변경 */
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 80%; /* 모달의 너비를 조절합니다. */
+  max-width: 400px; /* 모달의 최대 너비를 설정합니다. */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #aaa;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
 .back-container {
   position: relative;
   width: 100%;
@@ -157,10 +290,9 @@ const fetchWishlist = () => {
 
 .gray-squre {
   position: relative;
-  width: 90%;
-  height: calc(100% - 10%); /* 상하단 여백을 위해 전체 높이에서 10%를 뺌 */
-  margin: 5% auto; /* 상하단 여백 5%씩, 좌우 중앙 정렬 */
-  background-color: #D9D9D9;
+  width: 100%;
+  height: 100%; /* 상하단 여백을 위해 전체 높이에서 10%를 뺌 */
+  background: linear-gradient(135deg, #ff9999, #66ccff); /* 그라데이션 색상 설정 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,9 +302,9 @@ const fetchWishlist = () => {
 
 .main-container {
   position: relative;
-  width: 70%;
+  width: 80%;
   padding: 5%;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.836);
   border-radius: 10px;
   z-index: 3;
   margin-top: 20px; /* 위쪽 여백 */
@@ -186,6 +318,7 @@ const fetchWishlist = () => {
   width: 93%;
   height: 20vh;
   margin-top: 3vh;
+  margin-bottom: 3vh;
   border-radius: 100%;
 }
 
@@ -203,16 +336,25 @@ const fetchWishlist = () => {
   align-self: center;
 }
 
-@media (min-width: 1300px) {
-  .profile-info {
-    display: flex;
-  }
-  .profile-email {
-    margin-left: 50px
-  }
-  .profile-username {
-    margin-left: 50px
-  }
+.profile-email {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.email-info, .last-login-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.email-label, .last-login-label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.email-text, .last-login-text {
+  color: #555;
 }
 
 
@@ -236,6 +378,9 @@ const fetchWishlist = () => {
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 30px;
+  border: 2px solid #ddd; /* 테두리 두께와 색상 설정 */
+  border-radius: 15px; /* 테두리의 모서리를 둥글게 만듭니다. */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
 }
 
 .trophy-icon {

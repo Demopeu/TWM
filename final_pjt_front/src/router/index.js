@@ -13,6 +13,7 @@ import ArticleList from '@/components/ArticleList.vue'
 import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import UpdateView from '@/views/UpdateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +83,11 @@ const router = createRouter({
       path: '/profile/:userId',
       name: 'ProfileView',
       component: ProfileView,
+    },
+    {
+      path: '/profile/:articleId/update',
+      name: 'UpdateView',
+      component: UpdateView,
     }
   ]
 })

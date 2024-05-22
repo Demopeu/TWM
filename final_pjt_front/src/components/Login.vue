@@ -42,6 +42,7 @@ const login = function () {
     store.login(payload)
     username.value = null
     password.value = null
+
 }
 
 const goToSignUp = () => {

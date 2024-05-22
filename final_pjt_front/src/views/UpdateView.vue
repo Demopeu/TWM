@@ -11,7 +11,7 @@
                 <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
             </li>
             <li class="nav-item">
-                <button @click="gopronav()" class="btn btn-outline-light" style="border: black;">프로필</button>
+                <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
                 <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
@@ -27,7 +27,7 @@
             <div class="articleList-List-box-in">
               <div class="left-box">
                 <h1>나만의 리뷰</h1>
-              <form @submit.prevent="createArticle" class="form-box">
+              <form @submit.prevent="updateArticle" class="form-box">
                 <input type="text" name="title" id="title" v-model.trim="title" class="title-box" placeholder="제목을 입력해주세요">
                 <div class="button-box">
                   <div name="country" id="country-select">
@@ -42,7 +42,7 @@
                 </div>
                 <textarea name="content" id="content" cols="30" rows="10" v-model.trim="content" class="textarea-box"></textarea>
                 <div class="write-button-container">
-                  <input type="submit" class="write-button" value="글쓰기">
+                  <input type="submit" class="write-button" value="수정하기">
                 </div>
               </form>
               </div>
@@ -58,20 +58,38 @@
 <script setup>
 import { ref } from 'vue'
 import { useCounterStore } from '@/stores/counter';
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import axios from 'axios'
 const title = ref(null)
 const content = ref(null)
 const country = ref(null)
 const store = useCounterStore()
 const router = useRouter()
+const route = useRoute()
 
-const createArticle = function () {
+const articleId = route.params.articleId
+
+const fetchArticleData = () => {
+  axios.get(`http://127.0.0.1:8000/community/articles/${articleId}/`)
+    .then(response => {
+      title.value = response.data.title;
+      content.value = response.data.content;
+      country.value = response.data.country;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+fetchArticleData();
+
+const updateArticle = () => {
   const payload = {
     title: title.value,
     content: content.value,
     country: country.value
   }
-  store.createArticle(payload)
+  store.updateArticle(articleId, payload)
 }
 
 const setCountry = (value) => {

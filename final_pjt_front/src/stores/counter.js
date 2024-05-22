@@ -205,7 +205,6 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .then(response => {
       console.log('댓글이 등록되었습니다.')
-      console.log(response.data)
     })
     .catch(error => {
       console.log(error)
@@ -270,6 +269,45 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const deleteArticle = function(articleId) {
+    if (confirm("정말로 삭제하시겠습니까?")) {
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/community/articles/${articleId}/`,
+        headers: {
+          Authorization: `Token ${token.value}`
+        }
+      })
+     .then(response => {
+      router.push({ name: 'community'})
+     })
+     .catch(error => {
+        console.log(error)
+      })
+    } else {
+      console.log('삭제 취소')
+    }
+  }
 
-  return { articles, addWatchedMovie, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  const updateArticle = function(articleId, payload) {
+    axios({
+        method: 'put',
+        url: `http://127.0.0.1:8000/community/articles/${articleId}/`,
+        headers: {
+          Authorization: `Token ${token.value}`,
+          'Content-Type': 'application/json'
+        },
+        data: payload
+      })
+     .then(response => {
+        router.push({ name: 'community'})
+      })
+     .catch(error => {
+        console.log(error)
+      })
+    }
+
+  
+
+  return { articles, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })

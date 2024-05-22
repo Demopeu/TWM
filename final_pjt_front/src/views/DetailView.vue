@@ -24,8 +24,8 @@
       </nav>
       <div class="articleList-box">
           <div class="button-box">
-          <div class="Nomal-button" style="background-color: #F4AFFF;">수정</div>
-          <div class="Nomal-button" style="background-color: #FF6767;">삭제</div>
+          <div class="Nomal-button" style="background-color: #F4AFFF; cursor: pointer;" @click="goUpdatePage(article.id)">수정</div>
+          <div class="Nomal-button" style="background-color: #FF6767; cursor: pointer;" @click="store.deleteArticle(article.id)">삭제</div>
           </div>
           <div class="articleList-List-box">
           <div class="articleList-List-box-in">
@@ -98,7 +98,6 @@ const fetchArticleData = () => {
     url: `http://127.0.0.1:8000/community/articles/${route.params.articleId}/`
   })
   .then((response) => {
-    console.log(response.data)
     article.value = response.data
     likeCountNumber.value = article.value.like_users_count
     commentList.value = response.data.comment_set
@@ -131,6 +130,11 @@ const deleteComment = async (commentId) => {
     console.log(error)
   }
 }
+
+const goUpdatePage = (articleId) => {
+  router.push({ name: 'UpdateView', params: { articleId: articleId } })
+}
+
 const pdtbutton = async (articleId) => {
   try {
     await store.likeButton(articleId)

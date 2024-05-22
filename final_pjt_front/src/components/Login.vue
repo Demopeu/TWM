@@ -40,9 +40,9 @@ const login = function () {
         password: password.value,
     }
     store.login(payload)
-    store.fetchUserProfile()
     username.value = null
     password.value = null
+
 }
 
 const goToSignUp = () => {

@@ -126,7 +126,7 @@ def fetch_movies_from_tmdb(request):
     url = "https://api.themoviedb.org/3/discover/movie"
     api_key = settings.TMDB_API_KEY
     genre_mapping = get_genre_mapping(api_key)
-    countries = ['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'VE', 'CO', 'GB', 'FR', 'DE', 'IT', 'RU', 'ID', 'KR', 'CN', 'JP']
+    countries = ['ID'] # ['US', 'CA', 'MX', 'BR', 'AR', 'CL', 'VE', 'CO', 'GB', 'FR', 'DE', 'IT', 'RU', 'ID', 'KR', 'CN', 'JP']
     
     # 초당 요청 수를 제한하기 위한 변수
     requests_per_second = 35
@@ -134,7 +134,7 @@ def fetch_movies_from_tmdb(request):
 
     for country_name in countries:
         current_page = 1
-        while current_page < 3:
+        while current_page < 20:
             params = {
                 'api_key': api_key,
                 'page': current_page,
@@ -208,16 +208,19 @@ def recommend_movies(request, country):
             country = ['JP']
         
         user_wishlist = list(Wishlist.objects.filter(user=user).values_list('movie_id', flat=True))
-        print(user_wishlist)
         
         # DB에서 요청하는 사람의 위시리스트에 영화를 제외하고 각 국가별 영화를 선별해서 리스트에 넣는다.
         result = []
+        movie_titles = set()
         for cont in country:
             movies = Movie.objects.filter(country=cont)
             for movie in movies:
-                if movie.id not in user_wishlist:
+                if movie.id not in user_wishlist and movie.title not in movie_titles:
                     result.append(movie)
+                    movie_titles.add(movie.title)
 
+        recommend_movies = random.sample(result, min(len(result), 50))
+        print(recommend_movies)
         # 만일 유저가 선호하는 장르에 최소 3개 이상의 장르 정보가 쌓였다면 해당 장르를 기준으로 영화를 추천해준다.
         if len(user.like_genres) >= 3:
             sorted_genres = sorted(user.like_genres.items(), key=lambda x: x[1], reverse=True)
@@ -241,13 +244,13 @@ def recommend_movies(request, country):
             second_movie = len(sorted_results[2])
             third_movie = len(sorted_results[1])
             forth_movie = len(sorted_results[0])
-            recommend_movies = 0
+
             if first_movie + second_movie + third_movie + forth_movie <= 50:
                 recommend_movies = sorted_results[3] + sorted_results[2] + sorted_results[1] + sorted_results[0]
 
             else:
                 sub_results = [[] for _ in range(4)]
-                while sub_results < 50:
+                while sum(len(sublist) for sublist in sub_results) < 50:
                     for i in range(3, -1, -1):
                         if sorted_results[i]:
                             sub_results[i].append(sorted_results[i].pop())

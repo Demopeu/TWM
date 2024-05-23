@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$600000$RhoTFqlgkXrkXMbLY8Tu3M$A02q5SMdZ3ZlQd6DFpKfi8OoNOm+lG/Zq56nvtW7eo8=",
-        "last_login": "2024-05-22T14:15:51.382Z",
+        "last_login": "2024-05-23T00:18:25.887Z",
         "is_superuser": true,
         "username": "admin1",
         "first_name": "",
@@ -14,6 +14,7 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:27:21.315Z",
         "trophys": null,
+        "like_genres": {},
         "groups": [],
         "user_permissions": []
     }
@@ -23,7 +24,7 @@
     "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$600000$N7Mcz509fBHKynSjYVORS4$te9hW9oYVsR3mmWiFJ+5FWx5yous5fd6c3ftX4O1w8w=",
-        "last_login": "2024-05-22T13:45:31Z",
+        "last_login": "2024-05-23T00:47:54.562Z",
         "is_superuser": false,
         "username": "freakinit_97",
         "first_name": "",
@@ -32,7 +33,22 @@
         "is_staff": false,
         "is_active": true,
         "date_joined": "2024-05-22T13:38:59Z",
-        "trophys": "' Ϲ    ȭ', '       ȭ'",
+        "trophys": "'북미 영화', '남미 영화'",
+        "like_genres": {
+            "Comedy": 3,
+            "Adventure": 6,
+            "Horror": 1,
+            "Action": 7,
+            "Crime": 3,
+            "Mystery": 1,
+            "Thriller": 2,
+            "Science Fiction": 5,
+            "Romance": 1,
+            "Drama": 1,
+            "History": 1,
+            "Animation": 1,
+            "Family": 1
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -42,7 +58,7 @@
     "pk": 3,
     "fields": {
         "password": "pbkdf2_sha256$600000$3CsO1UeA630RaTyCvM8LLN$ozsomKkP1HqfyNbpcU5WHjltH/zcda22GHMBOUYKXp0=",
-        "last_login": "2024-05-22T14:13:57.313Z",
+        "last_login": "2024-05-23T00:53:39.186Z",
         "is_superuser": false,
         "username": "Amirmahan1387",
         "first_name": "",
@@ -52,6 +68,21 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:39:18.081Z",
         "trophys": null,
+        "like_genres": {
+            "Documentary": 1,
+            "Comedy": 4,
+            "": 1,
+            "Romance": 1,
+            "Music": 1,
+            "Adventure": 1,
+            "Crime": 2,
+            "Drama": 7,
+            "Thriller": 5,
+            "Action": 1,
+            "Mystery": 2,
+            "Fantasy": 1,
+            "Horror": 1
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -61,7 +92,7 @@
     "pk": 4,
     "fields": {
         "password": "pbkdf2_sha256$600000$VXwDJSnN3j4dtzKDUBmSQd$YTYPd4amowY91cM/3ehN6kn6STfLP1uDFs333EJ2wZ0=",
-        "last_login": "2024-05-22T14:06:50.717Z",
+        "last_login": "2024-05-23T00:55:01.520Z",
         "is_superuser": false,
         "username": "TwTvLaatiMafia",
         "first_name": "",
@@ -69,8 +100,24 @@
         "email": "TwTvLaatiMafia@gmail.com",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2024-05-22T13:39:39.959Z",
-        "trophys": null,
+        "date_joined": "2024-05-22T13:39:39Z",
+        "trophys": "'유럽 영화'",
+        "like_genres": {
+            "Adventure": 3,
+            "Action": 7,
+            "Thriller": 6,
+            "Comedy": 5,
+            "Romance": 4,
+            "Drama": 11,
+            "History": 3,
+            "War": 3,
+            "Science Fiction": 3,
+            "Western": 2,
+            "Animation": 3,
+            "Mystery": 2,
+            "Family": 2,
+            "Music": 1
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -80,7 +127,7 @@
     "pk": 5,
     "fields": {
         "password": "pbkdf2_sha256$600000$FEGq6K6lpj8tHQyu2OTCnH$CsNZGxv2lwc1y92ZkjYP7Fb2SeLtRZ9A3141fcePjV8=",
-        "last_login": "2024-05-22T13:49:35Z",
+        "last_login": "2024-05-23T00:57:02.959Z",
         "is_superuser": false,
         "username": "friendlyXeon",
         "first_name": "",
@@ -89,7 +136,21 @@
         "is_staff": false,
         "is_active": true,
         "date_joined": "2024-05-22T13:40:10Z",
-        "trophys": "' ƽþ    ȭ', '       ȭ', ' ߱    ȭ'",
+        "trophys": "'한국 영화', '인도 영화'",
+        "like_genres": {
+            "Action": 16,
+            "Adventure": 10,
+            "Science Fiction": 15,
+            "Fantasy": 3,
+            "Drama": 3,
+            "Documentary": 1,
+            "Family": 1,
+            "Thriller": 7,
+            "Comedy": 1,
+            "Animation": 1,
+            "Mystery": 1,
+            "Crime": 1
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -99,7 +160,7 @@
     "pk": 6,
     "fields": {
         "password": "pbkdf2_sha256$600000$WcB4ezRXhxKF7DMd5SKinI$ny9mzB8UJWcNtncFFF6iZi8AwAUNt7OPQFjjlk/+dgI=",
-        "last_login": "2024-05-22T13:50:21.509Z",
+        "last_login": "2024-05-23T01:06:45.815Z",
         "is_superuser": false,
         "username": "LunchBow",
         "first_name": "",
@@ -109,6 +170,23 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:40:28.184Z",
         "trophys": null,
+        "like_genres": {
+            "Adventure": 9,
+            "Fantasy": 7,
+            "Action": 18,
+            "Thriller": 10,
+            "Animation": 7,
+            "Science Fiction": 6,
+            "Drama": 8,
+            "Romance": 2,
+            "Mystery": 3,
+            "Horror": 3,
+            "Crime": 3,
+            "War": 2,
+            "History": 2,
+            "Family": 1,
+            "Comedy": 2
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -118,7 +196,7 @@
     "pk": 7,
     "fields": {
         "password": "pbkdf2_sha256$600000$AcYP58I4L4NbsgTCUZjfgu$DbcohKoIHrtGKfs4hx7YM+U3Qrledys3EjzTVTTMK3Q=",
-        "last_login": "2024-05-22T14:09:18.504Z",
+        "last_login": "2024-05-23T01:08:05.552Z",
         "is_superuser": false,
         "username": "TheFateOfBaldr",
         "first_name": "",
@@ -128,6 +206,22 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:40:50.280Z",
         "trophys": null,
+        "like_genres": {
+            "Drama": 8,
+            "Action": 11,
+            "Science Fiction": 2,
+            "Thriller": 6,
+            "Comedy": 5,
+            "Family": 1,
+            "Fantasy": 6,
+            "Adventure": 7,
+            "War": 2,
+            "History": 2,
+            "Animation": 1,
+            "Documentary": 1,
+            "Music": 1,
+            "Romance": 1
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -137,7 +231,7 @@
     "pk": 8,
     "fields": {
         "password": "pbkdf2_sha256$600000$7ISXQIcDWmHlgn7E8TQgY0$QLuI6coT0FXFkstzsGGEWrf2/FvN6Lt20y92OExE2TM=",
-        "last_login": "2024-05-22T14:03:26.750Z",
+        "last_login": "2024-05-22T14:03:26Z",
         "is_superuser": false,
         "username": "theSixthElement",
         "first_name": "",
@@ -145,8 +239,9 @@
         "email": "theSixthElement@gmail.com",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2024-05-22T13:41:15.668Z",
-        "trophys": null,
+        "date_joined": "2024-05-22T13:41:15Z",
+        "trophys": "",
+        "like_genres": {},
         "groups": [],
         "user_permissions": []
     }
@@ -166,6 +261,7 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:44:02.751Z",
         "trophys": null,
+        "like_genres": {},
         "groups": [],
         "user_permissions": []
     }
@@ -175,7 +271,7 @@
     "pk": 10,
     "fields": {
         "password": "pbkdf2_sha256$600000$NKkfjb5WMCeTgGDLPaTNAl$1qcLn+3oA3owj4/fp6pNGtrHWk2RPkBl/Sb8VNNCx7M=",
-        "last_login": "2024-05-22T14:12:11Z",
+        "last_login": "2024-05-23T01:09:21.955Z",
         "is_superuser": false,
         "username": "SkyArtura",
         "first_name": "",
@@ -184,7 +280,25 @@
         "is_staff": false,
         "is_active": true,
         "date_joined": "2024-05-22T13:44:32Z",
-        "trophys": "' ѱ    ȭ', ' Ϻ    ȭ', ' ߱    ȭ', '       ȭ', ' Ϲ    ȭ', ' ε    ȭ'",
+        "trophys": "' 한국 영화', '중국 영화', '일본 영화', '남미 영화', '북미 영화', '유럽 영화'",
+        "like_genres": {
+            "Animation": 1,
+            "Fantasy": 4,
+            "Drama": 13,
+            "Family": 2,
+            "Comedy": 2,
+            "Romance": 1,
+            "Action": 13,
+            "History": 1,
+            "Horror": 1,
+            "Mystery": 2,
+            "Adventure": 5,
+            "Thriller": 4,
+            "Science Fiction": 8,
+            "Crime": 2,
+            "Documentary": 1,
+            "War": 1
+        },
         "groups": [],
         "user_permissions": []
     }
@@ -204,6 +318,7 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:44:58.304Z",
         "trophys": null,
+        "like_genres": {},
         "groups": [],
         "user_permissions": []
     }
@@ -223,6 +338,7 @@
         "is_active": true,
         "date_joined": "2024-05-22T13:45:14.491Z",
         "trophys": null,
+        "like_genres": {},
         "groups": [],
         "user_permissions": []
     }

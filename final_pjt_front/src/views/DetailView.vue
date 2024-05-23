@@ -125,25 +125,28 @@ const createComment = async () => {
 }
 
 const deleteComment = async (commentId) => {
-  // for (const comment of commentList.value) {
-  //   console.log(comment.id === commentId)
-  //   if (comment.id === commentId) {
-  //     console.log(comment.user.username)
-      
-  //   }
-  //   }
-  if (article.value.user.id === store.username) {
-  try {
-    await store.deleteComment(commentId)
-    await fetchArticleData()
-  } catch (error) {
-    console.log(error)
+  let isDeleted = false
+  for (const comment of commentList.value) {
+    console.log(comment.user.username)
+    console.log(store.username)
+    if (comment.id === commentId && comment.user.username === store.username) {
+      try {
+        await store.deleteComment(commentId);
+        await fetchArticleData();
+        isDeleted = true;
+        toast.success("댓글을 성공적으로 삭제하였습니다.")
+        break
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
-}
-else {
-  toast.error('댓글 삭제 권한이 없습니다.')
-}
-}
+  // 삭제가 실패했을 때 에러 처리
+  if (!isDeleted) {
+    toast.error("댓글을 삭제할 권한이 없습니다.")
+    // 필요한 에러 처리 작업 추가
+  }
+};
 
 const goUpdatePage = (articleId) => {
   console.log(article.value.user.id)

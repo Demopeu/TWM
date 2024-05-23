@@ -10,7 +10,7 @@ export const useCounterStore = defineStore('counter', () => {
   const toast = useToast()
   const articles = ref()
   const userId = ref()
-  const username = ref()
+  const username = ref('')
 
 
   const login = function(payload) {
@@ -45,6 +45,7 @@ export const useCounterStore = defineStore('counter', () => {
     .then(response => {
       userId.value = response.data.pk
       username.value = response.data.username
+      console.log(username.value)
     })
     .catch(error => {
       console.log(error);
@@ -156,7 +157,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
     .then((response) => {
-      articles.value = response.data
+      articles.value = response.data.reverse()
     })
     .catch((error) => {
       console.log(error)
@@ -329,5 +330,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { articles, userId, signOut, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  return { articles, userId, username, signOut, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })

@@ -23,12 +23,13 @@ TWM(Travel With Movies)은 자체 개발한 알고리즘을 통해 사용자에�
 
 TWM 프로젝트는 사용자에게 문화적 다양성을 경험하게 하고, 영화라는 매개체를 통해 세계 여러 나라의 문화를 더욱 깊이 이해하고 느낄 수 있도록 하는 것을 목표로 합니다.
 
-2. 개발 스텍 및 개발 툴
+### 2. 개발 스텍 및 개발 툴
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
@@ -39,23 +40,123 @@ TWM 프로젝트는 사용자에게 문화적 다양성을 경험하게 하고, 
 ![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-3. 팀원 구성 및 역할 분담
+### 3. 팀원 구성 및 역할 분담
+
+- **팀장**: 김동현
+
+  - 전체 프로젝트 관리 및 팀 조율
+  - 주요 기술 결정 및 코드 리뷰
+  - 프론트엔드 개발 및 UI/UX 디자인
+  - Vue.js 및 Bootstrap을 활용한 인터페이스 구현
+  - Figma를 이용한 디자인 작업 및 사용자 경험 개선
+  - CSS를 통한 전체적인 페이지 디자인 구현
+  - JavaScript를 이용한 동적 페이지 기능 구현
+
+- **팀원**: 노재훈
+
+  - Django 및 백엔드 개발 담당
+  - Vue.js와 Django 간의 통신 구현
+  - CSS를 통한 프로필 페이지 디자인 구현
+  - 영화 추천 알고리즘 개발
+  - 데이터베이스 모델 설계 및 최적화
+  - API 설계 및 구현
+  - 사용자 인증 및 권한 관리 시스템 구축
 
 ## 프로젝트 정보
 
-1. 프로젝트 구조
+### 1. 프로젝트 구조
 
-    - 컴포넌트 구조
+- **Component Structure**
 
-    - erd
+![erd](https://github.com/Demopeu/TWM/assets/156268475/38229d0a-5c6d-4433-9cd6-2273f261b07d)
 
-2. 목업
+- **ERD(Entity Relationship Diagram)**
 
-3. 시작 가이드
+![erd](https://github.com/Demopeu/TWM/assets/156268475/38229d0a-5c6d-4433-9cd6-2273f261b07d)
 
-    - 요구 사항
+- **Mock-up**
 
-    - 설치 및 실행
+![erd](https://github.com/Demopeu/TWM/assets/156268475/38229d0a-5c6d-4433-9cd6-2273f261b07d)
+
+### 2. 시작 가이드
+
+#### 요구 사항
+
+- Node.js 12 이상
+- Vue.js 3.4.21 이상
+- axios 1.6.8 이상
+- bootstrap 5.3.3 이상
+- pinia 2.1.7 이상
+- Python 3.9 이상
+- Django 4.2.8 이상
+- 기타 필요한 패키지 및 라이브러리
+
+#### 설치 및 실행
+
+1. 저장소를 클론합니다:
+
+    ```bash
+    git clone https://github.com/Demopeu/TWM.git
+    ```
+
+2. 백엔드 폴더로 이동합니다:
+
+    ```bash
+    cd ../final_pjt_back/
+    ```
+
+3. 가상 환경을 설정하고 필요한 패키지를 설치합니다:
+
+    ```bash
+    python -m venv venv
+    venv\Scripts\activate  # 윈도우의 경우
+    pip install -r requirements.txt
+    ```
+
+4. 백엔드 프로젝트 루트에 `.env` 파일을 생성하고 필요한 환경 변수를 설정합니다.:
+
+    ```
+    SECRET_KEY=your_secret_key_here
+    DATABASE_URL=your_database_url_here
+    ```
+ 
+5. 데이터베이스 마이그레이션을 수행합니다:
+
+    ```bash
+    python manage.py migrate
+    ```
+
+6. 초기 데이터를 로드합니다:
+
+    ```bash
+    python manage.py loaddata users.json movies.json articles.json comments.json
+    ```
+
+7. 백엔드 서버를 실행합니다:
+
+    ```bash
+    python manage.py runserver
+    ```
+
+8. 프론트엔드 폴더로 이동합니다:
+
+    ```bash
+    cd ../final_pjt_front/
+    ```
+
+7. 필요한 패키지를 설치합니다:
+
+    ```bash
+    npm install
+    ```
+
+8. 프론트엔드 서버를 실행합니다:
+
+    ```bash
+    npm run dev
+    ```
+
+9. 웹 브라우저에서 `http://localhost:8080`을 열고 애플리케이션을 확인합니다.
 
 ## 프로젝트 결과물
 
@@ -80,95 +181,3 @@ TWM 프로젝트는 사용자에게 문화적 다양성을 경험하게 하고, 
 3. pull request
 
 ## License
-
-
-## Commit message 규칙
-
-1. 구조
-
-```
-type:title
-
-ex. git commit -m "docs: README 내용 수정"
-```
-
-- type
-
-![type](https://github.com/Demopeu/TWM/assets/156268475/c31f78f6-67bb-46f2-a830-58590515a02e)
-
-- title : 제목
-
-```
-docs: README 내용 수정
-fix: article/views.py create함수 오류 수정
-```
-
-## 소프트웨어 도구
-
-- Python
-
-- JS
-
-- HTML
-
-- CSS
-
-- Bootstrap
-
-- Vue3
-
-- Django
-
-- VS code
-
-- Figma
-
-- erdcloud
-
-- draw.io
-
-- Jira
-
-- GitHub
-
-## ERD(Entity Relationship Diagram)
-
-![erd](https://github.com/Demopeu/TWM/assets/156268475/38229d0a-5c6d-4433-9cd6-2273f261b07d)
-
-## Mock-up
-
-1. indexView
-
-![indexView](https://github.com/Demopeu/TWM/assets/156268475/b508dac5-02d5-4335-9985-e8b91c14da33)
-
-2. movieView
-
-![MovieView](https://github.com/Demopeu/TWM/assets/156268475/efd14562-4a4c-4601-8e05-d3e76a4d74f6)
-
-3. articleView
-
-![articlesView](https://github.com/Demopeu/TWM/assets/156268475/43b4ff35-1c58-4c21-8bad-69dac4dd9b3d)
-
-4. profileView
-
-![profile](https://github.com/Demopeu/TWM/assets/156268475/0ca2eb02-4d8e-4063-bdd6-a88b180464da)
-
-## Omissions 작성법
-
-1. 대주제 선택(ex. front, back)
-
-2. 직접적으로 문제가 있거나, 누락된 부분이 있는 페이지 작성
-
-    ```
-    1. Login.vue
-
-    - username, password 이모티콘 누락
-    ```
-
-    - 구동이 안될 정도의 큰 문제가 있을 경우, 대주제 바로 아래에 "##"를 이용하여 즉시 작성후 **!important**를 어미에 작성
-
-    - 구동은 되나, 전체에 걸쳐서 오류가 있을 경우, 대주제 바로 아래에 "##"를 이용하여 즉시 작성
-
-3. "##" 에 작성한 내용은 merge 설명에 기입 후, MM혹은 카카오톡을 이용하여 즉시 알림
-
-4. 완료되거나 해결 된 이슈는 삭제하지 말고 취소선을 그은 이후, 대주제 completed로 이동

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="logo-container">
-          <img src="@/assets/Logo_white.png" alt="logo" class="logo">
+          <img src="@/assets/Logo_white.png" alt="logo" class="logo" @click="store.goSelectcountryNav()" >
         </div>
       <div class="box-box">
         <div class="title">
@@ -28,7 +28,7 @@
   <script setup>
   import { useCounterStore } from '@/stores/counter'
   import { useRoute, RouterLink,useRouter } from 'vue-router'
-  import { ref,onMounted } from 'vue'
+  import { ref,onMounted,computed } from 'vue'
   import Swiper from 'swiper/bundle'
   
   const store = useCounterStore()
@@ -92,6 +92,9 @@ const gocomunav = ()=>{
     width: 190px;
     height: auto;
   }
+  .logo:hover {
+  cursor: pointer;
+}
   
   .movie-list-container {
     position: relative;

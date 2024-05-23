@@ -1,7 +1,7 @@
 <template>
   <div class="container min-vw-100 min-vh-100" >
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png">
+            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png" @click="store.goSelectcountryNav()">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,5 +83,9 @@ const goback =()=>{
   width: 190px;
   height: 70px;
   padding: 0;
+}
+
+.img-logo:hover {
+  cursor: pointer;
 }
 </style>

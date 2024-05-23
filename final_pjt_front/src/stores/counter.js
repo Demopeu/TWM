@@ -90,6 +90,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
      .then(response => {
         router.push({ name:'login' })
+        toast.success('회원가입이 완료되었습니다. 환영합니다!!')
       })
      .catch(error => {
       console.log(error.response.data)
@@ -121,9 +122,13 @@ export const useCounterStore = defineStore('counter', () => {
   }
   const goCommunityNav = () => {router.push({ name: 'community' })}
   const goIndexNav = () => {router.push({ name: 'login' })}
+  const goSelectcountryNav = () => {router.push({ name: 'selectcountry' })}
   // 임시
   const goProfileNav = (realuserId = userId.value) => {
-    router.push({ name: 'ProfileView', params: { userId: realuserId } });
+    router.push({ name: 'ProfileView', params: { userId: realuserId } })
+      .then(() => {
+        window.location.reload()
+      })
   }
   
     const addWishList = (movieId) => {
@@ -148,20 +153,20 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  const getArticles = function () {
-    axios({
-      method: 'get',
-      url: 'http://127.0.0.1:8000/community/articles/',
-      headers: {
-        Authorization: `Token ${token.value}`
-      }
-    })
-    .then((response) => {
+  const getArticles = async function () {
+    try{
+
+      const response  = await axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/community/articles/',
+        headers: {
+          Authorization: `Token ${token.value}`
+        }
+      })
       articles.value = response.data.reverse()
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+      } catch (error) {
+        console.log(error)
+      }
   }
 
   const createArticle = function (payload) {
@@ -229,8 +234,8 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  const likeButton = function (articleId) {
-    axios({
+  const likeButton = async function (articleId) {
+    await axios({
       method: 'post',
       url: `http://127.0.0.1:8000/community/articles/${articleId}/like/`,
       headers: {
@@ -330,5 +335,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
   
 
-  return { articles, userId, username, signOut, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  return { articles, userId, username, signOut, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,goSelectcountryNav,isLogin }
 }, { persist: true })

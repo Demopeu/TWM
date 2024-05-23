@@ -89,7 +89,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted,computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useCounterStore } from '@/stores/counter';
 import ArticleListItem from '@/components/ArticleListItem.vue';
 import router from '@/router'
@@ -98,13 +98,7 @@ const store = useCounterStore()
 const selectedCountry = ref('Global');
 const perPage = 10; // 페이지당 보여줄 아티클 수
 const currentPage = ref(1); // 현재 페이지
-
-const filteredArticles = computed(() => {
-  if (selectedCountry.value === 'Global') {
-    return store.articles;
-  }
-  return store.articles.filter(article => article.country === selectedCountry.value);
-});
+const filteredArticles = ref([]);
 
 const totalPages = computed(() => Math.ceil(filteredArticles.value.length / perPage));
 
@@ -130,8 +124,9 @@ const nextPage = () => {
   }
 };
 
-onMounted(() => {
-  store.getArticles();
+onMounted(async () => {
+  await store.getArticles();
+  filteredArticles.value = store.articles;
 });
 
 const goCreate = () => router.push({ name: 'CreateView' });
@@ -195,7 +190,9 @@ const goCreate = () => router.push({ name: 'CreateView' });
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
+.Nomal-button:hover {
+  cursor: pointer;
+}
 .large-button {
   border: 2px solid 
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png">
+            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png" @click="store.goSelectcountryNav()">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -11,7 +11,7 @@
                 <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
             </li>
             <li class="nav-item">
-                <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
+                <button @click="gopronav(store.userId)" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
                 <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
@@ -30,7 +30,7 @@
               <span class="profile-info" v-if="user && wishlist">
                 <div class="username-and-button">
                   <h2 class="profile-username">{{ user.username }}</h2>
-                  <button v-if="userId && userId == store.userId" class="withdraw-button" @click="confirmWithdrawal">회원 탈퇴</button>
+                  <button v-if="userId && userId == store.userId.value" class="withdraw-button" @click="confirmWithdrawal">회원 탈퇴</button>
                   <div v-if="isShowFirstModal">
                     <div class="signout-modal">
                       <p>회원 탈퇴하시겠습니까?</p>
@@ -200,7 +200,6 @@ onMounted(() => {
    .then(response => {
       user.value = response.data;
       userId.value = route.params.userId;
-      console.log(store.userId)
       if (response.data.trophys) {
         userTrophys.value = response.data.trophys.split(',').map(trophy => trophy.trim().replace(/^'|'$/g, ""));
       }
@@ -281,8 +280,8 @@ const gocomunav = ()=>{
   console.log('gocomunav 확인')
   store.goCommunityNav()
 }
-const gopronav = (useId)=>{
-  store.goProfileNav(useId)
+const gopronav = (userId)=>{
+  store.goProfileNav(userId)
 }
 const logout = ()=>{
 store.logout()
@@ -678,5 +677,7 @@ const goback =()=>{
   justify-content: space-around;
   margin-top: 20px;
 }
-
+.img-logo:hover {
+  cursor: pointer;
+}
 </style>

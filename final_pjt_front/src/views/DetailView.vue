@@ -1,7 +1,7 @@
 <template>
   <div class="container min-vw-100 min-vh-100">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-          <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png">
+          <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png" @click="store.goSelectcountryNav()">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -11,7 +11,7 @@
               <button @click.prevent="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
           </li>
           <li class="nav-item">
-              <button @click="gopronav(article.user.id)" class="btn btn-outline-light" style="border: black;">프로필</button>
+              <button @click="gopronav(store.userId)" class="btn btn-outline-light" style="border: black;">프로필</button>
           </li>
           <li class="nav-item">
               <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
@@ -25,7 +25,7 @@
       <div class="articleList-box">
           <div class="button-box">
           <div class="Nomal-button" style="background-color: #afdbff; cursor: pointer;" @click="goUpdatePage(article.id)">수정</div>
-          <div class="Nomal-button" style="background-color: #FF6767; cursor: pointer;" @click="store.deleteArticle(article.id)">삭제</div>
+          <div class="Nomal-button" style="background-color: #FF6767; cursor: pointer;" @click="goRemove(article.id)">삭제</div>
           </div>
           <div class="articleList-List-box">
           <div class="articleList-List-box-in">
@@ -93,7 +93,7 @@ const likeCountNumber = ref(0)
 const commentList = ref([])
 const routers = useRouter()
 
-const fetchArticleData = () => {
+const fetchArticleData = async () => {
   axios({
     method: 'get',
     url: `http://127.0.0.1:8000/community/articles/${route.params.articleId}/`
@@ -119,6 +119,7 @@ const createComment = async () => {
     await store.createComment(payload)
     comment.value = ''
     await fetchArticleData()
+    window.location.reload()
   } catch (error) {
     console.log(error)
   }
@@ -135,6 +136,9 @@ const deleteComment = async (commentId) => {
         await fetchArticleData();
         isDeleted = true;
         toast.success("댓글을 성공적으로 삭제하였습니다.")
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
         break
       } catch (error) {
         console.log(error);
@@ -155,6 +159,16 @@ const goUpdatePage = (articleId) => {
   }
   else {
     toast.error('수정 권한이 없습니다.')
+  }
+}
+
+const goRemove = (articleId) => {
+  console.log(article.value.user.id)
+  if (article.value.user.id === store.userId) {
+    store.deleteArticle(articleId)
+  }
+  else {
+    toast.error('삭제 권한이 없습니다.')
   }
 }
 
@@ -282,6 +296,10 @@ width: 190px;
 height: 70px;
 padding: 0;
 }
+
+.img-logo:hover {
+  cursor: pointer;
+}
 h1 {
 font-weight: bold;
 white-space: nowrap;
@@ -300,10 +318,13 @@ padding-top: 3vh;
 letter-spacing: -2px;
 }
 h4 {
-  overflow: hidden;
+  overflow: visible; /* 글자가 잘리지 않도록 설정 */
   padding-left: 2vh;
   padding-top: 3vh;
-  word-wrap: break-word;
+  word-wrap: break-word; /* 긴 단어도 줄 바꿈 */
+  letter-spacing: 0.05em; /* 글자 간격을 넓힘 */
+  line-height: 1.6; /* 줄간격을 키워서 가독성을 높임 */
+  white-space: pre-wrap; /* 연속된 공백과 줄 바꿈을 그대로 유지 */
 }
 h6 {
 font-weight: bold;

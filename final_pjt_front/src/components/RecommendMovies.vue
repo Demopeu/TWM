@@ -6,7 +6,13 @@
       <div class="box-box">
         <div class="title">
             <h1 class="title-text">Movies set in</h1>
-            <h1 class="title-text">{{ name }}</h1>
+            <h1 class="title-text" v-if="name === 'north_america'">North America</h1>
+            <h1 class="title-text" v-if="name === 'south_america'">South America</h1>
+            <h1 class="title-text" v-if="name === 'europe'">Europe</h1>
+            <h1 class="title-text" v-if="name === 'india'">India</h1>
+            <h1 class="title-text" v-if="name === 'china'">China</h1>
+            <h1 class="title-text" v-if="name === 'korea'">Korea</h1>
+            <h1 class="title-text" v-if="name === 'japan'">Japan</h1>
         </div>
       </div>
       <div class="movie-list-container swiper-container" ref="scrollContainer">

@@ -2,14 +2,62 @@
   <div>
     <div class="articleList-box">
       <div class="button-box">
-        <div class="Nomal-button" style="background-color: #A7A7A7;" @click="filterArticles('Global')">Global</div>
-        <div class="Nomal-button" style="background-color: #FFAFAF;" @click="filterArticles('north-america')">N.America</div>
-        <div class="Nomal-button" style="background-color: #FFEDAF;" @click="filterArticles('south-america')">S.America</div>
-        <div class="Nomal-button" style="background-color: #CFE4C5;" @click="filterArticles('europe')">Europe</div>
-        <div class="Nomal-button" style="background-color: #AFBCFF;" @click="filterArticles('india')">India</div>
-        <div class="Nomal-button" style="background-color: #e2f5c8;" @click="filterArticles('china')">China</div>
-        <div class="Nomal-button" style="background-color: #F4AFFF;" @click="filterArticles('korea')">Korea</div>
-        <div class="Nomal-button" style="background-color: #FF6767;" @click="filterArticles('japan')">Japan</div>
+        <div class="Nomal-button" :class="{ 'large-button': selectedCountry === 'Global' }"
+        :style="{ 
+          border: selectedCountry === 'Global' ? '8px solid #A7A7A7' : '', 
+          backgroundColor: selectedCountry === 'Global' ? '#696969' : '#A7A7A7',
+          'line-height': selectedCountry === 'Global' ? '4vh' : '6vh'
+          }" 
+         @click="filterArticles('Global')">Global</div>
+        <div class="Nomal-button" 
+        :style="{ 
+          border: selectedCountry === 'korea' ? '8px solid #F4AFFF' : '', 
+          backgroundColor: selectedCountry === 'korea' ? '#9a72a0' : '#F4AFFF',
+          'line-height': selectedCountry === 'korea' ? '4vh' : '6vh'
+          }"
+        @click="filterArticles('korea')">Korea</div>
+        <div class="Nomal-button"
+        :style="{ 
+          border: selectedCountry === 'north-america' ? '8px solid #FFAFAF' : '', 
+          backgroundColor: selectedCountry === 'north-america' ? '#b97f7f' : '#FFAFAF',
+          'line-height': selectedCountry === 'north-america' ? '4vh' : '6vh'
+          }"
+       @click="filterArticles('north-america')">N.America</div>
+        <div class="Nomal-button"
+        :style="{ 
+          border: selectedCountry === 'south-america' ? '8px solid #FFEDAF' : '', 
+          backgroundColor: selectedCountry === 'south-america' ? '#d1b75a' : '#FFEDAF',
+          'line-height': selectedCountry === 'south-america' ? '4vh' : '6vh'
+          }"
+         @click="filterArticles('south-america')">S.America</div>
+        <div class="Nomal-button"
+        :style="{ 
+          border: selectedCountry === 'europe' ? '8px solid #CFE4C5' : '', 
+          backgroundColor: selectedCountry === 'europe' ? '#9cac94' : '#CFE4C5',
+          'line-height': selectedCountry === 'europe' ? '4vh' : '6vh'
+          }"
+        @click="filterArticles('europe')">Europe</div>
+        <div class="Nomal-button"
+        :style="{ 
+          border: selectedCountry === 'india' ? '8px solid #AFBCFF' : '', 
+          backgroundColor: selectedCountry === 'india' ? '#868fbe' : '#AFBCFF',
+          'line-height': selectedCountry === 'india' ? '4vh' : '6vh'
+          }"
+        @click="filterArticles('india')">India</div>
+        <div class="Nomal-button"
+        :style="{ 
+          border: selectedCountry === 'china' ? '8px solid #e2f5c8' : '', 
+          backgroundColor: selectedCountry === 'china' ? '#a1ad90' : '#e2f5c8',
+          'line-height': selectedCountry === 'china' ? '4vh' : '6vh'
+          }"
+        @click="filterArticles('china')">China</div>
+        <div class="Nomal-button"
+        :style="{ 
+          border: selectedCountry === 'japan' ? '8px solid #FF6767' : '', 
+          backgroundColor: selectedCountry === 'japan' ? '#af4848' : '#FF6767',
+          'line-height': selectedCountry === 'japan' ? '4vh' : '6vh'
+          }"
+        @click="filterArticles('japan')">Japan</div>
       </div>
       <div class="articleList-List-box">
         <div class="articleList-List-box-in">
@@ -28,9 +76,9 @@
           <hr>
         </div>
         <div class="pagination-buttons">
-          <button class="pagination-button" @click="prevPage" :disabled="currentPage === 1">Previous</button>
+          <button class="pagination-button" @click="prevPage" :disabled="currentPage === 1">이전</button>
           <span class="page-info">Page: {{ currentPage }} / {{ totalPages }}</span>
-          <button class="pagination-button" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+          <button class="pagination-button" @click="nextPage" :disabled="currentPage === totalPages">다음</button>
         </div>
         <div class="write-button-container">
           <button @click="goCreate" class="write-button">글쓰기</button>
@@ -147,6 +195,11 @@ const goCreate = () => router.push({ name: 'CreateView' });
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.large-button {
+  border: 2px solid 
+}
+
 .write-button-container {
   display: flex;
   justify-content: flex-end;;

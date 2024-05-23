@@ -10,6 +10,7 @@ export const useCounterStore = defineStore('counter', () => {
   const toast = useToast()
   const articles = ref()
   const userId = ref()
+  const username = ref()
 
 
   const login = function(payload) {
@@ -43,7 +44,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .then(response => {
       userId.value = response.data.pk
-      console.log(response.data)
+      username.value = response.data.username
     })
     .catch(error => {
       console.log(error);
@@ -281,10 +282,12 @@ export const useCounterStore = defineStore('counter', () => {
         }
       })
      .then(response => {
+      toast.success('게시물이 성공적으로 삭제되었습니다.');
       router.push({ name: 'community'})
      })
      .catch(error => {
         console.log(error)
+        toast.error('게시물을 삭제하는 중에 오류가 발생했습니다.');
       })
     } else {
       console.log('삭제 취소')
@@ -311,5 +314,5 @@ export const useCounterStore = defineStore('counter', () => {
 
   
 
-  return { articles, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  return { articles, userId, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })

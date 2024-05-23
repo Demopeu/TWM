@@ -24,7 +24,7 @@
       </nav>
       <div class="articleList-box">
           <div class="button-box">
-          <div class="Nomal-button" style="background-color: #F4AFFF; cursor: pointer;" @click="goUpdatePage(article.id)">수정</div>
+          <div class="Nomal-button" style="background-color: #afdbff; cursor: pointer;" @click="goUpdatePage(article.id)">수정</div>
           <div class="Nomal-button" style="background-color: #FF6767; cursor: pointer;" @click="store.deleteArticle(article.id)">삭제</div>
           </div>
           <div class="articleList-List-box">
@@ -54,7 +54,7 @@
                     <div style="display: flex;">
                       <h6 style="flex: 1;">{{ comment.user.username }}</h6>
                       <h6 style="flex: 4;">{{ comment.content }}</h6>
-                      <form @submit="deleteComment(comment.id)" style="flex: 0.5;">
+                      <form @submit.prevent="deleteComment(comment.id)" style="flex: 0.5;">
                         <input type="submit" value="X" style="height: 3vh; width: auto;">
                       </form>
                     </div>
@@ -64,7 +64,7 @@
                 <div v-else style="margin-top: 1vh;">
                   <h6>첫 댓글을 달아주세요!</h6>
                 </div>
-                  <form @submit="createComment" style="margin: 1vh 0 1vh 2vh;">
+                  <form @submit.prevent="createComment" style="margin: 1vh 0 1vh 2vh;">
                       <input type="text" v-model="comment" style="width: 70%; border-radius: 5vh;">
                       <input type="submit" style="margin-left: 3vh;" class="write-button">
                   </form>
@@ -82,8 +82,9 @@ import { useRoute, RouterLink,useRouter } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios'
 import router from '@/router';
+import { useToast } from 'vue-toastification'
 
-
+const toast = useToast()
 const store = useCounterStore()
 const route = useRoute()
 const article = ref(null)
@@ -101,6 +102,7 @@ const fetchArticleData = () => {
     article.value = response.data
     likeCountNumber.value = article.value.like_users_count
     commentList.value = response.data.comment_set
+    console.log(commentList.value)
   })
   .catch((error) => {
     console.log(error)
@@ -123,6 +125,14 @@ const createComment = async () => {
 }
 
 const deleteComment = async (commentId) => {
+  // for (const comment of commentList.value) {
+  //   console.log(comment.id === commentId)
+  //   if (comment.id === commentId) {
+  //     console.log(comment.user.username)
+      
+  //   }
+  //   }
+  if (article.value.user.id === store.username) {
   try {
     await store.deleteComment(commentId)
     await fetchArticleData()
@@ -130,9 +140,19 @@ const deleteComment = async (commentId) => {
     console.log(error)
   }
 }
+else {
+  toast.error('댓글 삭제 권한이 없습니다.')
+}
+}
 
 const goUpdatePage = (articleId) => {
+  console.log(article.value.user.id)
+  if (article.value.user.id === store.userId) {
   router.push({ name: 'UpdateView', params: { articleId: articleId } })
+  }
+  else {
+    toast.error('수정 권한이 없습니다.')
+  }
 }
 
 const pdtbutton = async (articleId) => {

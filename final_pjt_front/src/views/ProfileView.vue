@@ -30,7 +30,7 @@
               <span class="profile-info" v-if="user && wishlist">
                 <div class="username-and-button">
                   <h2 class="profile-username">{{ user.username }}</h2>
-                  <button v-if="userId && userId == store.userId.value" class="withdraw-button" @click="confirmWithdrawal">회원 탈퇴</button>
+                  <button v-if="userId && userId == store.userId" class="withdraw-button" @click="confirmWithdrawal">회원 탈퇴</button>
                   <div v-if="isShowFirstModal">
                     <div class="signout-modal">
                       <p>회원 탈퇴하시겠습니까?</p>

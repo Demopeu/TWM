@@ -1,7 +1,7 @@
 <template>
     <div class="container-inner">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png" @click="goidnav">
+            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>

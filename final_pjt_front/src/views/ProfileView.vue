@@ -23,7 +23,6 @@
           </div>
         </nav>
         <div class="back-container">
-      <div class="black-squre"></div>
         <div class="gray-squre">
           <div class="main-container">
             <div class="profile-image-info">
@@ -142,7 +141,7 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import image1 from '@/assets/profile/image1.jpg';
 import image2 from '@/assets/profile/image2.jpg';
@@ -165,6 +164,7 @@ const profileImage = ref(null)
 const userId = ref(null)
 const isShowFirstModal = ref(false)
 const isShowSecondModal = ref(false)
+const routers = useRouter()
 
 const formattedDate = function (date) {
   formatDate.value = date.substring(0, 10);
@@ -200,7 +200,6 @@ onMounted(() => {
    .then(response => {
       user.value = response.data;
       userId.value = route.params.userId;
-      console.log(userId.value)
       console.log(store.userId)
       if (response.data.trophys) {
         userTrophys.value = response.data.trophys.split(',').map(trophy => trophy.trim().replace(/^'|'$/g, ""));
@@ -276,6 +275,21 @@ const completeWithdrawal = () => {
 
 const signOut = function () {
   store.signOut(store.userId);
+}
+
+const gocomunav = ()=>{
+  console.log('gocomunav 확인')
+  store.goCommunityNav()
+}
+const gopronav = (useId)=>{
+  store.goProfileNav(useId)
+}
+const logout = ()=>{
+store.logout()
+}
+
+const goback =()=>{
+  routers.go(-1)
 }
 
 </script>
@@ -604,6 +618,7 @@ const signOut = function () {
 .navbar {
   width: auto;
   padding: 0;
+  background-color: transparent;
 }
 
 .img-logo {

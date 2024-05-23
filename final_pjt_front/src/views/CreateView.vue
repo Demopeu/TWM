@@ -47,7 +47,7 @@
               </form>
               </div>
               <div class="right-box">
-                <div class="ad-box"></div>
+                <div class="ad-box" @click="goads()"></div>
               </div>
             </div>
     </div>
@@ -93,6 +93,10 @@ const logout = ()=>{
 }
 const goback =()=>{
   router.go(-1)
+}
+
+const goads = ()=>{
+  window.open("https://www.ssafy11th-songsam.site/", "_blank");
 }
 </script>
 
@@ -147,9 +151,15 @@ const goback =()=>{
 .ad-box {
   width: 80%;
   height: 80%;
+  background-image: url('@/assets/ads.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
   background-color: black;
+  background-position: center;
 }
-
+.ad-box:hover {
+  cursor: pointer;
+}
 .form-box{
   width: 100%;
   display: flex;

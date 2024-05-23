@@ -122,8 +122,6 @@ export const useCounterStore = defineStore('counter', () => {
   const goIndexNav = () => {router.push({ name: 'login' })}
   // 임시
   const goProfileNav = (realuserId = userId.value) => {
-    console.log(userId.value)
-    console.log(realuserId)
     router.push({ name: 'ProfileView', params: { userId: realuserId } });
   }
   
@@ -312,7 +310,24 @@ export const useCounterStore = defineStore('counter', () => {
       })
     }
 
+  const signOut = function(userId) {
+    axios({
+      method: 'delete',
+      url: `http://127.0.0.1:8000/accounts/signout/user/${userId}/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+    .then(response => {
+      toast.success('회원 탈퇴가 완료되었습니다. 이용해 주셔서 감사합니다.')
+      router.push({ name: 'login' })
+    })
+    .catch(error => {
+      console.log(error)
+      toast.error('회원 탈퇴가 잘 이루어지지 않았습니다. 고객 센터에 문의해주세요.')
+    })
+  }
   
 
-  return { articles, userId, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
+  return { articles, userId, signOut, updateArticle, addWatchedMovie, deleteArticle, fetchUserProfile, likeButton, deleteComment, createArticle, createComment, logout, login, addWishList, getArticles, token, movies, signUp, goRecommendedMovie,goCommunityNav,goIndexNav,goProfileNav,isLogin }
 }, { persist: true })

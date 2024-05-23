@@ -1,12 +1,58 @@
 <template>
-    <div class="back-container">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <img class="img-logo" src="@/assets/Logo_white.png" alt="Logo_black.png">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav d-flex ms-auto">
+            <li class="nav-item">
+                <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
+            </li>
+            <li class="nav-item">
+                <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
+            </li>
+            <li class="nav-item">
+                <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>
+            </li>
+            <li class="nav-item">
+                <button @click="goback" class="btn btn-outline-light" style="border: black;">뒤로가기</button>
+            </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="back-container">
       <div class="black-squre"></div>
         <div class="gray-squre">
           <div class="main-container">
             <div class="profile-image-info">
               <span v-if="profileImage"><img class="profile-image" alt="profile_image" :src=profileImage></span>
               <span class="profile-info" v-if="user && wishlist">
-                <h2 class="profile-username">{{ user.username }}</h2>
+                <div class="username-and-button">
+                  <h2 class="profile-username">{{ user.username }}</h2>
+                  <button v-if="userId && userId == store.userId" class="withdraw-button" @click="confirmWithdrawal">회원 탈퇴</button>
+                  <div v-if="isShowFirstModal">
+                    <div class="signout-modal">
+                      <p>회원 탈퇴하시겠습니까?</p>
+                      <div class="button-group">
+                        <button class="cancel-button" @click="cancelWithdrawal">취소</button>
+                        <button class="confirm-button" @click="showSecondModal">확인</button>
+                      </div>
+                    </div>
+                    <div class="signout-overlay"></div>
+                  </div>
+                  <div v-if="isShowSecondModal">
+                    <div class="signout-modal">
+                      <p>정말로 회원 탈퇴하시겠습니까?</p>
+                      <div class="button-group">
+                        <button class="cancel-button" @click="cancelWithdrawal">취소</button>
+                        <button class="confirm-button" @click="completeWithdrawal">확인</button>
+                      </div>
+                    </div>
+                    <div class="signout-overlay"></div>
+                  </div>
+                </div>
                 <hr>
                 <div class="profile-email">
                   <div class="email-info">
@@ -88,7 +134,9 @@
             </div>
           </div>
         </div>
-    </div>
+    </div>  
+  </div>
+    
 </template>
 
 <script setup>
@@ -114,6 +162,9 @@ const wishlist = ref(null)
 const store = useCounterStore();
 const formatDate = ref(null)
 const profileImage = ref(null)
+const userId = ref(null)
+const isShowFirstModal = ref(false)
+const isShowSecondModal = ref(false)
 
 const formattedDate = function (date) {
   formatDate.value = date.substring(0, 10);
@@ -148,6 +199,9 @@ onMounted(() => {
   })
    .then(response => {
       user.value = response.data;
+      userId.value = route.params.userId;
+      console.log(userId.value)
+      console.log(store.userId)
       if (response.data.trophys) {
         userTrophys.value = response.data.trophys.split(',').map(trophy => trophy.trim().replace(/^'|'$/g, ""));
       }
@@ -202,6 +256,26 @@ const openModal = () => {
 
 const closeModal = () => {
   modalOpen.value = false;
+}
+
+const confirmWithdrawal = () => {
+  isShowFirstModal.value = true;
+}
+const showSecondModal = () => {
+  isShowFirstModal.value = false;
+  isShowSecondModal.value = true;
+}
+const cancelWithdrawal = () => {
+  isShowSecondModal.value = false;
+  isShowFirstModal.value = false;
+}
+const completeWithdrawal = () => {
+  isShowSecondModal.value = false;
+  signOut()
+}
+
+const signOut = function () {
+  store.signOut(store.userId);
 }
 
 </script>
@@ -363,14 +437,60 @@ const closeModal = () => {
   height: 5vh;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
   .logo-image {
     display: none;
   }
 }
 
+@media screen and (max-width: 768px) {
+    .profile-email {
+        display: none;
+    }
+}
+@media screen and (max-height: 708px) {
+    .profile-email {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 968px) {
+    .profile-username {
+      margin-left: 20px;
+    }
+    .profile-email {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .email-info, .last-login-info {
+        margin-right: 20px; /* 요소들 간의 간격 조절 */
+    }
+}
+
+.username-and-button {
+    display: flex;
+    align-items: center;
+}
+
 .profile-username {
-  font-weight: bold;
+    font-weight: bold;
+    margin-right: 10px; /* 회원 탈퇴 버튼과의 간격 조절 */
+}
+
+.withdraw-button {
+    background-color: #000000; /* 배경색 지정 */
+    color: white; /* 글자색 지정 */
+    border: none; /* 테두리 제거 */
+    padding: 5px 6px; /* 내부 여백 조절 */
+    font-size: 11px;
+    border-radius: 5px; /* 버튼 모서리 둥글게 만들기 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태로 만듦 */
+    transition: background-color 0.3s ease; /* 배경색 변화에 애니메이션 적용 */
+}
+
+.withdraw-button:hover {
+    background-color: #FF6347; /* 호버 시 배경색 변경 */
 }
 
 .page-container {
@@ -465,6 +585,83 @@ const closeModal = () => {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+  font-size: 1.2em;
+  padding: 10px 20px;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 10px;
+}
+
+.navbar {
+  width: auto;
+  padding: 0;
+}
+
+.img-logo {
+  
+  width: 190px;
+  height: 70px;
+  padding: 0;
+}
+
+.signout-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001; /* 모달이 overlay 위에 배치되도록 z-index 설정 */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  pointer-events: auto; /* 모달 클릭 가능하도록 설정 */
+}
+
+.signout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 바탕이 어두워지는 투명도 조절 */
+  z-index: 1000; /* 모달 위에 배치되도록 z-index 설정 */
+  pointer-events: none; /* 모달 클릭 가능하도록 설정 */
+}
+
+.cancel-button,
+.confirm-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.cancel-button {
+  color: white;
+  background-color: #ff6b6b;
+}
+
+.confirm-button {
+  color: white;
+  background-color: #007bff;
+}
+
+/* 모달 버튼 그룹 스타일링 */
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 </style>

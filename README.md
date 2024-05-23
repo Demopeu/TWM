@@ -117,7 +117,7 @@ TWM 프로젝트는 사용자에게 문화적 다양성을 경험하게 하고, 
 
 - **ERD(Entity Relationship Diagram)**
 
-![erd](https://github.com/Demopeu/TWM/assets/156268475/38229d0a-5c6d-4433-9cd6-2273f261b07d)
+![ERD](https://github.com/Demopeu/TWM/assets/156268475/a026d61b-ef96-4240-aa7d-5efffd2876e1)
 
 ---
 

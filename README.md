@@ -85,6 +85,7 @@ TWM 프로젝트는 사용자에게 문화적 다양성을 경험하게 하고, 
   - Figma를 이용한 디자인 작업 및 사용자 경험 개선
   - CSS를 통한 전체적인 페이지 디자인 구현
   - JavaScript를 이용한 동적 페이지 기능 구현
+  - README.md 작성, 발표 자료 제작 및 발표
 
 ![노재훈](https://github.com/Demopeu/TWM/assets/156268475/b012f620-630c-45ed-9d2c-4177186f3684)
 

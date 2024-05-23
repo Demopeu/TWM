@@ -102,7 +102,6 @@ const fetchArticleData = async () => {
     article.value = response.data
     likeCountNumber.value = article.value.like_users_count
     commentList.value = response.data.comment_set
-    console.log(commentList.value)
   })
   .catch((error) => {
     console.log(error)
@@ -128,8 +127,6 @@ const createComment = async () => {
 const deleteComment = async (commentId) => {
   let isDeleted = false
   for (const comment of commentList.value) {
-    console.log(comment.user.username)
-    console.log(store.username)
     if (comment.id === commentId && comment.user.username === store.username) {
       try {
         await store.deleteComment(commentId);
@@ -153,7 +150,6 @@ const deleteComment = async (commentId) => {
 };
 
 const goUpdatePage = (articleId) => {
-  console.log(article.value.user.id)
   if (article.value.user.id === store.userId) {
   router.push({ name: 'UpdateView', params: { articleId: articleId } })
   }
@@ -163,7 +159,6 @@ const goUpdatePage = (articleId) => {
 }
 
 const goRemove = (articleId) => {
-  console.log(article.value.user.id)
   if (article.value.user.id === store.userId) {
     store.deleteArticle(articleId)
   }
@@ -187,7 +182,6 @@ const goidnav = ()=>{
   store.goIndexNav()
 }
 const gocomunav = ()=>{
-  console.log('gocomunav 확인')
   store.goCommunityNav()
 }
 const gopronav = (useId)=>{

@@ -102,6 +102,7 @@ router.beforeEach((to,from)=>{
   }
   if (store.token !== null && to.name === 'login') {
     toast.info("이미 로그인된 상태입니다.")
+    console.log(store.token)
     return false
   }
 })

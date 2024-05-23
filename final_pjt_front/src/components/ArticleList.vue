@@ -110,6 +110,12 @@ const currentPageArticles = computed(() => {
 
 const filterArticles = (country) => {
   selectedCountry.value = country;
+  if (country === 'Global') {
+    filteredArticles.value = store.articles;
+  }else{
+  currentPage.value = 1;
+  filteredArticles.value = store.articles.filter(article => article.country === country);
+  }
 };
 
 const prevPage = () => {

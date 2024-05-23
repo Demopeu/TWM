@@ -45,14 +45,13 @@ export const useCounterStore = defineStore('counter', () => {
     .then(response => {
       userId.value = response.data.pk
       username.value = response.data.username
-      console.log(username.value)
     })
     .catch(error => {
       console.log(error);
     });
   }
   
-  const logout = function() {
+  const logout = async function() {
     axios({
       method: 'post',
       url: 'http://127.0.0.1:8000/accounts/logout/',

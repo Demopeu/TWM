@@ -11,7 +11,7 @@
                 <button @click="gocomunav" class="btn btn-outline-light" style="border: black;">게시판</button>
             </li>
             <li class="nav-item">
-                <button @click="gopronav" class="btn btn-outline-light" style="border: black;">프로필</button>
+                <button @click="gopronav()" class="btn btn-outline-light" style="border: black;">프로필</button>
             </li>
             <li class="nav-item">
                 <button @click="logout" class="btn btn-outline-light" style="border: black;">로그아웃</button>

@@ -1,0 +1,230 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$RhoTFqlgkXrkXMbLY8Tu3M$A02q5SMdZ3ZlQd6DFpKfi8OoNOm+lG/Zq56nvtW7eo8=",
+        "last_login": "2024-05-22T14:15:51.382Z",
+        "is_superuser": true,
+        "username": "admin1",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin1@naver.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:27:21.315Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$N7Mcz509fBHKynSjYVORS4$te9hW9oYVsR3mmWiFJ+5FWx5yous5fd6c3ftX4O1w8w=",
+        "last_login": "2024-05-22T13:45:31Z",
+        "is_superuser": false,
+        "username": "freakinit_97",
+        "first_name": "",
+        "last_name": "",
+        "email": "freakinit_97@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:38:59Z",
+        "trophys": "' Ϲ    ȭ', '       ȭ'",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$3CsO1UeA630RaTyCvM8LLN$ozsomKkP1HqfyNbpcU5WHjltH/zcda22GHMBOUYKXp0=",
+        "last_login": "2024-05-22T14:13:57.313Z",
+        "is_superuser": false,
+        "username": "Amirmahan1387",
+        "first_name": "",
+        "last_name": "",
+        "email": "Amirmahan1387@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:39:18.081Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$VXwDJSnN3j4dtzKDUBmSQd$YTYPd4amowY91cM/3ehN6kn6STfLP1uDFs333EJ2wZ0=",
+        "last_login": "2024-05-22T14:06:50.717Z",
+        "is_superuser": false,
+        "username": "TwTvLaatiMafia",
+        "first_name": "",
+        "last_name": "",
+        "email": "TwTvLaatiMafia@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:39:39.959Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$FEGq6K6lpj8tHQyu2OTCnH$CsNZGxv2lwc1y92ZkjYP7Fb2SeLtRZ9A3141fcePjV8=",
+        "last_login": "2024-05-22T13:49:35Z",
+        "is_superuser": false,
+        "username": "friendlyXeon",
+        "first_name": "",
+        "last_name": "",
+        "email": "friendlyXeon@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:40:10Z",
+        "trophys": "' ƽþ    ȭ', '       ȭ', ' ߱    ȭ'",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$WcB4ezRXhxKF7DMd5SKinI$ny9mzB8UJWcNtncFFF6iZi8AwAUNt7OPQFjjlk/+dgI=",
+        "last_login": "2024-05-22T13:50:21.509Z",
+        "is_superuser": false,
+        "username": "LunchBow",
+        "first_name": "",
+        "last_name": "",
+        "email": "LunchBow@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:40:28.184Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$AcYP58I4L4NbsgTCUZjfgu$DbcohKoIHrtGKfs4hx7YM+U3Qrledys3EjzTVTTMK3Q=",
+        "last_login": "2024-05-22T14:09:18.504Z",
+        "is_superuser": false,
+        "username": "TheFateOfBaldr",
+        "first_name": "",
+        "last_name": "",
+        "email": "TheFateOfBaldr@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:40:50.280Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$7ISXQIcDWmHlgn7E8TQgY0$QLuI6coT0FXFkstzsGGEWrf2/FvN6Lt20y92OExE2TM=",
+        "last_login": "2024-05-22T14:03:26.750Z",
+        "is_superuser": false,
+        "username": "theSixthElement",
+        "first_name": "",
+        "last_name": "",
+        "email": "theSixthElement@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:41:15.668Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$9JWjSiJgnXvgmYOhmkzi1s$B/JwfI2FYP8bKa9aifh/QI4ipzu0N50erL59WEcPZ58=",
+        "last_login": "2024-05-22T14:04:07.450Z",
+        "is_superuser": false,
+        "username": "Head-Employment1405",
+        "first_name": "",
+        "last_name": "",
+        "email": "Head-Employment1405@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:44:02.751Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$NKkfjb5WMCeTgGDLPaTNAl$1qcLn+3oA3owj4/fp6pNGtrHWk2RPkBl/Sb8VNNCx7M=",
+        "last_login": "2024-05-22T14:12:11Z",
+        "is_superuser": false,
+        "username": "SkyArtura",
+        "first_name": "",
+        "last_name": "",
+        "email": "SkyArtura@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:44:32Z",
+        "trophys": "' ѱ    ȭ', ' Ϻ    ȭ', ' ߱    ȭ', '       ȭ', ' Ϲ    ȭ', ' ε    ȭ'",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$qD7xs5C774Fg7N5c8Oehn5$fwAUAOf+bu63oUv265YeJi+hQmLql+A0eHeCbZv+BwI=",
+        "last_login": "2024-05-22T14:05:40.696Z",
+        "is_superuser": false,
+        "username": "Slogstin",
+        "first_name": "",
+        "last_name": "",
+        "email": "Slogstin@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:44:58.304Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$JIzMAbvHbTGiM7s4ejd6pU$xQZj6lj2vDydsUclc9kJutAMAPwjrUb7zzIvkE19XkA=",
+        "last_login": "2024-05-22T14:10:21.670Z",
+        "is_superuser": false,
+        "username": "kerem2109",
+        "first_name": "",
+        "last_name": "",
+        "email": "kerem2109@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-05-22T13:45:14.491Z",
+        "trophys": null,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

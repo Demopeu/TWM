@@ -1,0 +1,200 @@
+[
+{
+    "model": "community.comment",
+    "pk": 1,
+    "fields": {
+        "article": 6,
+        "user": 4,
+        "content": "ㅇㅈ",
+        "created_at": "2024-05-22T14:08:03.761Z",
+        "updated_at": "2024-05-22T14:08:03.761Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 2,
+    "fields": {
+        "article": 1,
+        "user": 4,
+        "content": "크리스토퍼 놀란 감독 영화는 항상 재밌어요",
+        "created_at": "2024-05-22T14:08:37.890Z",
+        "updated_at": "2024-05-22T14:08:37.890Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 3,
+    "fields": {
+        "article": 10,
+        "user": 4,
+        "content": "기대작이였는데 오늘 개봉했군요",
+        "created_at": "2024-05-22T14:09:05.941Z",
+        "updated_at": "2024-05-22T14:09:05.941Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 4,
+    "fields": {
+        "article": 11,
+        "user": 7,
+        "content": "올드보이 재밌어요!",
+        "created_at": "2024-05-22T14:09:49.008Z",
+        "updated_at": "2024-05-22T14:09:49.008Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 5,
+    "fields": {
+        "article": 12,
+        "user": 7,
+        "content": "페르난도 감독의 역작이라 생각합니다",
+        "created_at": "2024-05-22T14:10:09.251Z",
+        "updated_at": "2024-05-22T14:10:09.251Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 6,
+    "fields": {
+        "article": 10,
+        "user": 12,
+        "content": "맞아요 진짜 명작이에요",
+        "created_at": "2024-05-22T14:10:36.142Z",
+        "updated_at": "2024-05-22T14:10:36.142Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 7,
+    "fields": {
+        "article": 4,
+        "user": 12,
+        "content": "말이 필요없는 명작",
+        "created_at": "2024-05-22T14:10:48.224Z",
+        "updated_at": "2024-05-22T14:10:48.224Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 8,
+    "fields": {
+        "article": 1,
+        "user": 12,
+        "content": "인셉션도 꼭 보세요",
+        "created_at": "2024-05-22T14:11:09.709Z",
+        "updated_at": "2024-05-22T14:11:09.709Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 9,
+    "fields": {
+        "article": 5,
+        "user": 12,
+        "content": "숨은 명작",
+        "created_at": "2024-05-22T14:11:32.339Z",
+        "updated_at": "2024-05-22T14:11:32.339Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 10,
+    "fields": {
+        "article": 14,
+        "user": 12,
+        "content": "처음보는 영화인데 한 번 봐야겠네요",
+        "created_at": "2024-05-22T14:11:51.938Z",
+        "updated_at": "2024-05-22T14:11:51.938Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 11,
+    "fields": {
+        "article": 4,
+        "user": 10,
+        "content": "봉준호 감독님 영화는 다 재밌어요",
+        "created_at": "2024-05-22T14:12:26.130Z",
+        "updated_at": "2024-05-22T14:12:26.130Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 13,
+    "fields": {
+        "article": 5,
+        "user": 10,
+        "content": "시간가는줄 모르고 보게되는 영화입니다.",
+        "created_at": "2024-05-22T14:13:05.445Z",
+        "updated_at": "2024-05-22T14:13:05.445Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 14,
+    "fields": {
+        "article": 9,
+        "user": 10,
+        "content": "무술 영화인가요?",
+        "created_at": "2024-05-22T14:13:21.476Z",
+        "updated_at": "2024-05-22T14:13:21.476Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 15,
+    "fields": {
+        "article": 11,
+        "user": 10,
+        "content": "댓글 감사합니다",
+        "created_at": "2024-05-22T14:13:34.450Z",
+        "updated_at": "2024-05-22T14:13:34.450Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 16,
+    "fields": {
+        "article": 2,
+        "user": 10,
+        "content": "프랑스 영화 낭만있네요",
+        "created_at": "2024-05-22T14:13:46.658Z",
+        "updated_at": "2024-05-22T14:13:46.658Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 17,
+    "fields": {
+        "article": 7,
+        "user": 3,
+        "content": "무협장르 영화 원탑!",
+        "created_at": "2024-05-22T14:14:28.438Z",
+        "updated_at": "2024-05-22T14:14:28.438Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 18,
+    "fields": {
+        "article": 4,
+        "user": 3,
+        "content": "진짜 재밌어요",
+        "created_at": "2024-05-22T14:14:41.981Z",
+        "updated_at": "2024-05-22T14:14:41.981Z"
+    }
+},
+{
+    "model": "community.comment",
+    "pk": 19,
+    "fields": {
+        "article": 11,
+        "user": 3,
+        "content": "몇 번을 봐도 재미있는 영화",
+        "created_at": "2024-05-22T14:15:06.536Z",
+        "updated_at": "2024-05-22T14:15:06.536Z"
+    }
+}
+]

@@ -315,8 +315,8 @@ export const useCounterStore = defineStore('counter', () => {
       })
     }
 
-  const signOut = function(userId) {
-    axios({
+  const signOut = async function(userId) {
+    await axios({
       method: 'delete',
       url: `http://127.0.0.1:8000/accounts/signout/user/${userId}/`,
       headers: {
@@ -324,6 +324,8 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
     .then(response => {
+      localStorage.removeItem('auth_token')
+      token.value = null
       toast.success('회원 탈퇴가 완료되었습니다. 이용해 주셔서 감사합니다.')
       router.push({ name: 'login' })
     })
